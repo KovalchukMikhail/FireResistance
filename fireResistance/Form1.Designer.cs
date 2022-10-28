@@ -84,9 +84,10 @@
             "R90",
             "R120",
             "R150"});
-            this.comboBoxFireResistanceLimit.Location = new System.Drawing.Point(17, 40);
+            this.comboBoxFireResistanceLimit.Location = new System.Drawing.Point(25, 32);
+            this.comboBoxFireResistanceLimit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxFireResistanceLimit.Name = "comboBoxFireResistanceLimit";
-            this.comboBoxFireResistanceLimit.Size = new System.Drawing.Size(80, 24);
+            this.comboBoxFireResistanceLimit.Size = new System.Drawing.Size(65, 21);
             this.comboBoxFireResistanceLimit.TabIndex = 0;
             this.comboBoxFireResistanceLimit.Text = "R120";
             this.comboBoxFireResistanceLimit.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
@@ -94,34 +95,38 @@
             // LablefireResistanceLimit
             // 
             this.LablefireResistanceLimit.AutoSize = true;
-            this.LablefireResistanceLimit.Location = new System.Drawing.Point(14, 21);
+            this.LablefireResistanceLimit.Location = new System.Drawing.Point(11, 17);
+            this.LablefireResistanceLimit.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LablefireResistanceLimit.Name = "LablefireResistanceLimit";
-            this.LablefireResistanceLimit.Size = new System.Drawing.Size(299, 16);
+            this.LablefireResistanceLimit.Size = new System.Drawing.Size(233, 13);
             this.LablefireResistanceLimit.TabIndex = 1;
             this.LablefireResistanceLimit.Text = "Выберете требуемый предел огнестойкости";
             // 
             // labelLenthElement
             // 
             this.labelLenthElement.AutoSize = true;
-            this.labelLenthElement.Location = new System.Drawing.Point(13, 67);
+            this.labelLenthElement.Location = new System.Drawing.Point(10, 54);
+            this.labelLenthElement.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelLenthElement.Name = "labelLenthElement";
-            this.labelLenthElement.Size = new System.Drawing.Size(173, 16);
+            this.labelLenthElement.Size = new System.Drawing.Size(136, 13);
             this.labelLenthElement.TabIndex = 2;
             this.labelLenthElement.Text = "Укажите длину элемента";
             // 
             // textBoxLenthElement
             // 
-            this.textBoxLenthElement.Location = new System.Drawing.Point(60, 86);
+            this.textBoxLenthElement.Location = new System.Drawing.Point(48, 69);
+            this.textBoxLenthElement.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxLenthElement.Name = "textBoxLenthElement";
-            this.textBoxLenthElement.Size = new System.Drawing.Size(100, 22);
+            this.textBoxLenthElement.Size = new System.Drawing.Size(81, 19);
             this.textBoxLenthElement.TabIndex = 3;
             // 
             // labelLenthInmm
             // 
             this.labelLenthInmm.AutoSize = true;
-            this.labelLenthInmm.Location = new System.Drawing.Point(170, 94);
+            this.labelLenthInmm.Location = new System.Drawing.Point(136, 75);
+            this.labelLenthInmm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelLenthInmm.Name = "labelLenthInmm";
-            this.labelLenthInmm.Size = new System.Drawing.Size(25, 16);
+            this.labelLenthInmm.Size = new System.Drawing.Size(23, 13);
             this.labelLenthInmm.TabIndex = 4;
             this.labelLenthInmm.Text = "мм";
             this.labelLenthInmm.Click += new System.EventHandler(this.label1_Click);
@@ -129,27 +134,30 @@
             // labelHeightInmm
             // 
             this.labelHeightInmm.AutoSize = true;
-            this.labelHeightInmm.Location = new System.Drawing.Point(170, 141);
+            this.labelHeightInmm.Location = new System.Drawing.Point(136, 113);
+            this.labelHeightInmm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelHeightInmm.Name = "labelHeightInmm";
-            this.labelHeightInmm.Size = new System.Drawing.Size(25, 16);
+            this.labelHeightInmm.Size = new System.Drawing.Size(23, 13);
             this.labelHeightInmm.TabIndex = 7;
             this.labelHeightInmm.Text = "мм";
             this.labelHeightInmm.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBoxHeightElement
             // 
-            this.textBoxHeightElement.Location = new System.Drawing.Point(60, 135);
+            this.textBoxHeightElement.Location = new System.Drawing.Point(48, 108);
+            this.textBoxHeightElement.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxHeightElement.Name = "textBoxHeightElement";
-            this.textBoxHeightElement.Size = new System.Drawing.Size(100, 22);
+            this.textBoxHeightElement.Size = new System.Drawing.Size(81, 19);
             this.textBoxHeightElement.TabIndex = 6;
             this.textBoxHeightElement.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // labelHeightElement
             // 
             this.labelHeightElement.AutoSize = true;
-            this.labelHeightElement.Location = new System.Drawing.Point(15, 114);
+            this.labelHeightElement.Location = new System.Drawing.Point(12, 91);
+            this.labelHeightElement.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelHeightElement.Name = "labelHeightElement";
-            this.labelHeightElement.Size = new System.Drawing.Size(180, 16);
+            this.labelHeightElement.Size = new System.Drawing.Size(143, 13);
             this.labelHeightElement.TabIndex = 5;
             this.labelHeightElement.Text = "Укажите высоту элемента";
             this.labelHeightElement.Click += new System.EventHandler(this.label3_Click);
@@ -157,34 +165,38 @@
             // labelWidthInmm
             // 
             this.labelWidthInmm.AutoSize = true;
-            this.labelWidthInmm.Location = new System.Drawing.Point(170, 186);
+            this.labelWidthInmm.Location = new System.Drawing.Point(136, 149);
+            this.labelWidthInmm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelWidthInmm.Name = "labelWidthInmm";
-            this.labelWidthInmm.Size = new System.Drawing.Size(25, 16);
+            this.labelWidthInmm.Size = new System.Drawing.Size(23, 13);
             this.labelWidthInmm.TabIndex = 10;
             this.labelWidthInmm.Text = "мм";
             // 
             // textBoxWidthElement
             // 
-            this.textBoxWidthElement.Location = new System.Drawing.Point(60, 179);
+            this.textBoxWidthElement.Location = new System.Drawing.Point(48, 143);
+            this.textBoxWidthElement.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxWidthElement.Name = "textBoxWidthElement";
-            this.textBoxWidthElement.Size = new System.Drawing.Size(100, 22);
+            this.textBoxWidthElement.Size = new System.Drawing.Size(81, 19);
             this.textBoxWidthElement.TabIndex = 9;
             // 
             // labelWidthElement
             // 
             this.labelWidthElement.AutoSize = true;
-            this.labelWidthElement.Location = new System.Drawing.Point(16, 159);
+            this.labelWidthElement.Location = new System.Drawing.Point(13, 127);
+            this.labelWidthElement.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelWidthElement.Name = "labelWidthElement";
-            this.labelWidthElement.Size = new System.Drawing.Size(182, 16);
+            this.labelWidthElement.Size = new System.Drawing.Size(144, 13);
             this.labelWidthElement.TabIndex = 8;
             this.labelWidthElement.Text = "Укажите ширину элемента";
             // 
             // labelFixationElement
             // 
             this.labelFixationElement.AutoSize = true;
-            this.labelFixationElement.Location = new System.Drawing.Point(17, 248);
+            this.labelFixationElement.Location = new System.Drawing.Point(14, 198);
+            this.labelFixationElement.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelFixationElement.Name = "labelFixationElement";
-            this.labelFixationElement.Size = new System.Drawing.Size(356, 16);
+            this.labelFixationElement.Size = new System.Drawing.Size(278, 13);
             this.labelFixationElement.TabIndex = 12;
             this.labelFixationElement.Text = "Выберите вариант закрепления по концам элемента";
             // 
@@ -192,21 +204,23 @@
             // 
             this.comboBoxFixationElement.FormattingEnabled = true;
             this.comboBoxFixationElement.Items.AddRange(new object[] {
-            "1. Не смещаемая заделка на двух концах",
-            "2. Не смещаемая заделка на двух концах с податливым ограниченным поворотом",
-            "3. Шарнирные опоры на двух концах"});
-            this.comboBoxFixationElement.Location = new System.Drawing.Point(20, 267);
+            "НЕ СМЕЩАЕМАЯ ЗАДЕЛКА НА ДВУХ КОНЦАХ",
+            "НЕ СМЕЩАЕМАЯ ЗАДЕЛКА НА ДВУХ КОНЦАХ С ПОДАТЛИВЫМ ОГРАНИЧЕННЫМ ПОВОРОТОМ",
+            "ШАРНИРНЫЕ ОПОРЫ НА ДВУХ КОНЦАХ"});
+            this.comboBoxFixationElement.Location = new System.Drawing.Point(25, 214);
+            this.comboBoxFixationElement.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxFixationElement.Name = "comboBoxFixationElement";
-            this.comboBoxFixationElement.Size = new System.Drawing.Size(600, 24);
+            this.comboBoxFixationElement.Size = new System.Drawing.Size(510, 21);
             this.comboBoxFixationElement.TabIndex = 11;
-            this.comboBoxFixationElement.Text = "1. Не смещаемая заделка на двух концах";
+            this.comboBoxFixationElement.Text = "НЕ СМЕЩАЕМАЯ ЗАДЕЛКА НА ДВУХ КОНЦАХ С ПОДАТЛИВЫМ ОГРАНИЧЕННЫМ ПОВОРОТОМ";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(466, 21);
+            this.pictureBox1.Location = new System.Drawing.Point(390, 11);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(154, 180);
+            this.pictureBox1.Size = new System.Drawing.Size(133, 151);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
@@ -214,70 +228,78 @@
             // labelAInmm
             // 
             this.labelAInmm.AutoSize = true;
-            this.labelAInmm.Location = new System.Drawing.Point(170, 230);
+            this.labelAInmm.Location = new System.Drawing.Point(136, 184);
+            this.labelAInmm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAInmm.Name = "labelAInmm";
-            this.labelAInmm.Size = new System.Drawing.Size(25, 16);
+            this.labelAInmm.Size = new System.Drawing.Size(23, 13);
             this.labelAInmm.TabIndex = 16;
             this.labelAInmm.Text = "мм";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(60, 223);
+            this.textBox1.Location = new System.Drawing.Point(48, 178);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
+            this.textBox1.Size = new System.Drawing.Size(81, 19);
             this.textBox1.TabIndex = 15;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 204);
+            this.label2.Location = new System.Drawing.Point(14, 163);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(461, 16);
+            this.label2.Size = new System.Drawing.Size(363, 13);
             this.label2.TabIndex = 14;
             this.label2.Text = "Укажите расстояние от грани элемента до центра тяжести арматуры";
             // 
             // labelLenth
             // 
             this.labelLenth.AutoSize = true;
-            this.labelLenth.Location = new System.Drawing.Point(30, 92);
+            this.labelLenth.Location = new System.Drawing.Point(25, 74);
+            this.labelLenth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelLenth.Name = "labelLenth";
-            this.labelLenth.Size = new System.Drawing.Size(24, 16);
+            this.labelLenth.Size = new System.Drawing.Size(22, 13);
             this.labelLenth.TabIndex = 17;
             this.labelLenth.Text = "L =";
             // 
             // labelHeight
             // 
             this.labelHeight.AutoSize = true;
-            this.labelHeight.Location = new System.Drawing.Point(30, 141);
+            this.labelHeight.Location = new System.Drawing.Point(25, 113);
+            this.labelHeight.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelHeight.Name = "labelHeight";
-            this.labelHeight.Size = new System.Drawing.Size(24, 16);
+            this.labelHeight.Size = new System.Drawing.Size(22, 13);
             this.labelHeight.TabIndex = 18;
             this.labelHeight.Text = "h =";
             // 
             // labelWidth
             // 
             this.labelWidth.AutoSize = true;
-            this.labelWidth.Location = new System.Drawing.Point(30, 185);
+            this.labelWidth.Location = new System.Drawing.Point(25, 148);
+            this.labelWidth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelWidth.Name = "labelWidth";
-            this.labelWidth.Size = new System.Drawing.Size(25, 16);
+            this.labelWidth.Size = new System.Drawing.Size(22, 13);
             this.labelWidth.TabIndex = 19;
             this.labelWidth.Text = "b =";
             // 
             // labelA
             // 
             this.labelA.AutoSize = true;
-            this.labelA.Location = new System.Drawing.Point(29, 229);
+            this.labelA.Location = new System.Drawing.Point(25, 183);
+            this.labelA.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelA.Name = "labelA";
-            this.labelA.Size = new System.Drawing.Size(25, 16);
+            this.labelA.Size = new System.Drawing.Size(22, 13);
             this.labelA.TabIndex = 20;
             this.labelA.Text = "a =";
             // 
             // labelArmatureClass
             // 
             this.labelArmatureClass.AutoSize = true;
-            this.labelArmatureClass.Location = new System.Drawing.Point(17, 294);
+            this.labelArmatureClass.Location = new System.Drawing.Point(14, 235);
+            this.labelArmatureClass.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelArmatureClass.Name = "labelArmatureClass";
-            this.labelArmatureClass.Size = new System.Drawing.Size(272, 16);
+            this.labelArmatureClass.Size = new System.Drawing.Size(213, 13);
             this.labelArmatureClass.TabIndex = 22;
             this.labelArmatureClass.Text = "Выберите класс арматуры по прочности";
             // 
@@ -292,21 +314,23 @@
             "А800",
             "А1000",
             "В500",
-            "А500с марка 25Г2С по ГОСТ Р 52544-2006",
-            "А600С марки 18Г2СФ термомеханически упрочненная",
-            "А500С марки Ст3Гпс термомеханически упрочненная по ГОСТ 34028-2016"});
-            this.comboBoxArmatureClass.Location = new System.Drawing.Point(20, 313);
+            "А500С МАРКА 25Г2С ПО ГОСТ Р 52544-2006",
+            "А600С МАРКИ 18Г2СФ ТЕРМОМЕХАНИЧЕСКИ УПРОЧНЕННАЯ",
+            "А500С МАРКИ Ст3Гпс ТЕРМОМЕХАНИЧЕСКИ УПРОЧНЕННАЯ ПО ГОСТ 34028-2016"});
+            this.comboBoxArmatureClass.Location = new System.Drawing.Point(25, 250);
+            this.comboBoxArmatureClass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxArmatureClass.Name = "comboBoxArmatureClass";
-            this.comboBoxArmatureClass.Size = new System.Drawing.Size(600, 24);
+            this.comboBoxArmatureClass.Size = new System.Drawing.Size(510, 21);
             this.comboBoxArmatureClass.TabIndex = 21;
-            this.comboBoxArmatureClass.Text = "А500С марки Ст3Гпс термомеханически упрочненная по ГОСТ 34028-2016";
+            this.comboBoxArmatureClass.Text = "А500С МАРКИ Ст3Гпс ТЕРМОМЕХАНИЧЕСКИ УПРОЧНЕННАЯ ПО ГОСТ 34028-2016";
             // 
             // labelConcreteClass
             // 
             this.labelConcreteClass.AutoSize = true;
-            this.labelConcreteClass.Location = new System.Drawing.Point(17, 386);
+            this.labelConcreteClass.Location = new System.Drawing.Point(14, 309);
+            this.labelConcreteClass.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelConcreteClass.Name = "labelConcreteClass";
-            this.labelConcreteClass.Size = new System.Drawing.Size(254, 16);
+            this.labelConcreteClass.Size = new System.Drawing.Size(198, 13);
             this.labelConcreteClass.TabIndex = 24;
             this.labelConcreteClass.Text = "Выберите класс бетона по прочности";
             this.labelConcreteClass.Click += new System.EventHandler(this.label1_Click_1);
@@ -323,9 +347,10 @@
             "B40",
             "B45",
             "B50"});
-            this.comboBoxConcreteClass.Location = new System.Drawing.Point(20, 405);
+            this.comboBoxConcreteClass.Location = new System.Drawing.Point(25, 324);
+            this.comboBoxConcreteClass.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxConcreteClass.Name = "comboBoxConcreteClass";
-            this.comboBoxConcreteClass.Size = new System.Drawing.Size(80, 24);
+            this.comboBoxConcreteClass.Size = new System.Drawing.Size(65, 21);
             this.comboBoxConcreteClass.TabIndex = 23;
             this.comboBoxConcreteClass.Text = "B30";
             this.comboBoxConcreteClass.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
@@ -333,9 +358,10 @@
             // labelArmatureDiameter
             // 
             this.labelArmatureDiameter.AutoSize = true;
-            this.labelArmatureDiameter.Location = new System.Drawing.Point(17, 432);
+            this.labelArmatureDiameter.Location = new System.Drawing.Point(14, 346);
+            this.labelArmatureDiameter.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelArmatureDiameter.Name = "labelArmatureDiameter";
-            this.labelArmatureDiameter.Size = new System.Drawing.Size(199, 16);
+            this.labelArmatureDiameter.Size = new System.Drawing.Size(156, 13);
             this.labelArmatureDiameter.TabIndex = 26;
             this.labelArmatureDiameter.Text = "Выберите диаметр арматуры";
             // 
@@ -356,18 +382,20 @@
             "32",
             "36",
             "40"});
-            this.comboBoxArmatureDiameter.Location = new System.Drawing.Point(20, 451);
+            this.comboBoxArmatureDiameter.Location = new System.Drawing.Point(25, 361);
+            this.comboBoxArmatureDiameter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxArmatureDiameter.Name = "comboBoxArmatureDiameter";
-            this.comboBoxArmatureDiameter.Size = new System.Drawing.Size(80, 24);
+            this.comboBoxArmatureDiameter.Size = new System.Drawing.Size(65, 21);
             this.comboBoxArmatureDiameter.TabIndex = 25;
             this.comboBoxArmatureDiameter.Text = "10";
             // 
             // labelArmatureAmount
             // 
             this.labelArmatureAmount.AutoSize = true;
-            this.labelArmatureAmount.Location = new System.Drawing.Point(17, 478);
+            this.labelArmatureAmount.Location = new System.Drawing.Point(14, 382);
+            this.labelArmatureAmount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelArmatureAmount.Name = "labelArmatureAmount";
-            this.labelArmatureAmount.Size = new System.Drawing.Size(300, 16);
+            this.labelArmatureAmount.Size = new System.Drawing.Size(234, 13);
             this.labelArmatureAmount.TabIndex = 28;
             this.labelArmatureAmount.Text = "Выберите количество арматурных стержней";
             // 
@@ -395,43 +423,48 @@
             "18",
             "19",
             "20"});
-            this.comboBoxArmatureAmount.Location = new System.Drawing.Point(20, 497);
+            this.comboBoxArmatureAmount.Location = new System.Drawing.Point(25, 398);
+            this.comboBoxArmatureAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxArmatureAmount.Name = "comboBoxArmatureAmount";
-            this.comboBoxArmatureAmount.Size = new System.Drawing.Size(80, 24);
+            this.comboBoxArmatureAmount.Size = new System.Drawing.Size(65, 21);
             this.comboBoxArmatureAmount.TabIndex = 27;
             this.comboBoxArmatureAmount.Text = "2";
             // 
             // labelMomentSign
             // 
             this.labelMomentSign.AutoSize = true;
-            this.labelMomentSign.Location = new System.Drawing.Point(35, 550);
+            this.labelMomentSign.Location = new System.Drawing.Point(25, 440);
+            this.labelMomentSign.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMomentSign.Name = "labelMomentSign";
-            this.labelMomentSign.Size = new System.Drawing.Size(28, 16);
+            this.labelMomentSign.Size = new System.Drawing.Size(25, 13);
             this.labelMomentSign.TabIndex = 32;
             this.labelMomentSign.Text = "M =";
             // 
             // labelMomentTxM
             // 
             this.labelMomentTxM.AutoSize = true;
-            this.labelMomentTxM.Location = new System.Drawing.Point(175, 552);
+            this.labelMomentTxM.Location = new System.Drawing.Point(140, 442);
+            this.labelMomentTxM.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMomentTxM.Name = "labelMomentTxM";
-            this.labelMomentTxM.Size = new System.Drawing.Size(28, 16);
+            this.labelMomentTxM.Size = new System.Drawing.Size(24, 13);
             this.labelMomentTxM.TabIndex = 31;
             this.labelMomentTxM.Text = "т*м";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(64, 543);
+            this.textBox2.Location = new System.Drawing.Point(51, 434);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
+            this.textBox2.Size = new System.Drawing.Size(81, 19);
             this.textBox2.TabIndex = 30;
             // 
             // labelMoment
             // 
             this.labelMoment.AutoSize = true;
-            this.labelMoment.Location = new System.Drawing.Point(17, 524);
+            this.labelMoment.Location = new System.Drawing.Point(14, 419);
+            this.labelMoment.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMoment.Name = "labelMoment";
-            this.labelMoment.Size = new System.Drawing.Size(625, 16);
+            this.labelMoment.Size = new System.Drawing.Size(487, 13);
             this.labelMoment.TabIndex = 29;
             this.labelMoment.Text = "Укажите величину изгибающего момента от постоянной и длительной нормативной нагру" +
     "зки";
@@ -439,9 +472,10 @@
             // labellabelStrengthSign
             // 
             this.labellabelStrengthSign.AutoSize = true;
-            this.labellabelStrengthSign.Location = new System.Drawing.Point(36, 595);
+            this.labellabelStrengthSign.Location = new System.Drawing.Point(25, 477);
+            this.labellabelStrengthSign.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labellabelStrengthSign.Name = "labellabelStrengthSign";
-            this.labellabelStrengthSign.Size = new System.Drawing.Size(27, 16);
+            this.labellabelStrengthSign.Size = new System.Drawing.Size(24, 13);
             this.labellabelStrengthSign.TabIndex = 36;
             this.labellabelStrengthSign.Text = "N =";
             this.labellabelStrengthSign.Click += new System.EventHandler(this.label1_Click_2);
@@ -449,27 +483,30 @@
             // labelStrengthT
             // 
             this.labelStrengthT.AutoSize = true;
-            this.labelStrengthT.Location = new System.Drawing.Point(176, 597);
+            this.labelStrengthT.Location = new System.Drawing.Point(141, 479);
+            this.labelStrengthT.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelStrengthT.Name = "labelStrengthT";
-            this.labelStrengthT.Size = new System.Drawing.Size(14, 16);
+            this.labelStrengthT.Size = new System.Drawing.Size(12, 13);
             this.labelStrengthT.TabIndex = 35;
             this.labelStrengthT.Text = "т";
             this.labelStrengthT.Click += new System.EventHandler(this.label3_Click_1);
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(64, 587);
+            this.textBox3.Location = new System.Drawing.Point(51, 471);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
+            this.textBox3.Size = new System.Drawing.Size(81, 19);
             this.textBox3.TabIndex = 34;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // labelStrength
             // 
             this.labelStrength.AutoSize = true;
-            this.labelStrength.Location = new System.Drawing.Point(17, 568);
+            this.labelStrength.Location = new System.Drawing.Point(14, 455);
+            this.labelStrength.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelStrength.Name = "labelStrength";
-            this.labelStrength.Size = new System.Drawing.Size(593, 16);
+            this.labelStrength.Size = new System.Drawing.Size(461, 13);
             this.labelStrength.TabIndex = 33;
             this.labelStrength.Text = "Укажите величину нормальной силы от постоянной и длительной нормативной нагрузки";
             this.labelStrength.Click += new System.EventHandler(this.label4_Click);
@@ -477,9 +514,10 @@
             // labelConcreteType
             // 
             this.labelConcreteType.AutoSize = true;
-            this.labelConcreteType.Location = new System.Drawing.Point(17, 340);
+            this.labelConcreteType.Location = new System.Drawing.Point(14, 272);
+            this.labelConcreteType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelConcreteType.Name = "labelConcreteType";
-            this.labelConcreteType.Size = new System.Drawing.Size(149, 16);
+            this.labelConcreteType.Size = new System.Drawing.Size(116, 13);
             this.labelConcreteType.TabIndex = 38;
             this.labelConcreteType.Text = "Выберите вид бетона";
             // 
@@ -487,22 +525,24 @@
             // 
             this.comboBoxConcreteType.FormattingEnabled = true;
             this.comboBoxConcreteType.Items.AddRange(new object[] {
-            "Тяжелый, на силикатном заполнителе",
-            "Тяжелый, на карбонатном заполнителе",
-            "Конструкционный керамзитобетон"});
-            this.comboBoxConcreteType.Location = new System.Drawing.Point(21, 360);
+            "ТЯЖЕЛЫЙ, НА СИЛИКАТНОМ ЗАПОЛНИТЕЛЕ",
+            "ТЯЖЕЛЫЙ, НА КАРБОНАТНОМ ЗАПОЛНИТЕЛЕ",
+            "КОНСТРУКЦИОННЫЙ КЕРАМЗИТОБЕТОН"});
+            this.comboBoxConcreteType.Location = new System.Drawing.Point(25, 288);
+            this.comboBoxConcreteType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxConcreteType.Name = "comboBoxConcreteType";
-            this.comboBoxConcreteType.Size = new System.Drawing.Size(600, 24);
+            this.comboBoxConcreteType.Size = new System.Drawing.Size(510, 21);
             this.comboBoxConcreteType.TabIndex = 37;
-            this.comboBoxConcreteType.Text = "Тяжелый, на силикатном заполнителе";
+            this.comboBoxConcreteType.Text = "ТЯЖЕЛЫЙ, НА СИЛИКАТНОМ ЗАПОЛНИТЕЛЕ";
             // 
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonCancel.Location = new System.Drawing.Point(510, 621);
+            this.buttonCancel.Location = new System.Drawing.Point(437, 491);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(120, 30);
+            this.buttonCancel.Size = new System.Drawing.Size(96, 24);
             this.buttonCancel.TabIndex = 39;
             this.buttonCancel.Text = "Выход";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -511,20 +551,22 @@
             // buttonСalculation
             // 
             this.buttonСalculation.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonСalculation.Location = new System.Drawing.Point(304, 621);
+            this.buttonСalculation.Location = new System.Drawing.Point(272, 491);
+            this.buttonСalculation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonСalculation.Name = "buttonСalculation";
-            this.buttonСalculation.Size = new System.Drawing.Size(200, 30);
+            this.buttonСalculation.Size = new System.Drawing.Size(160, 24);
             this.buttonСalculation.TabIndex = 40;
             this.buttonСalculation.Text = "Расчет";
             this.buttonСalculation.UseVisualStyleBackColor = true;
             // 
             // LableFireResistanceForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(642, 663);
+            this.ClientSize = new System.Drawing.Size(544, 526);
             this.Controls.Add(this.buttonСalculation);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.labelConcreteType);
@@ -567,8 +609,10 @@
             this.Controls.Add(this.LablefireResistanceLimit);
             this.Controls.Add(this.comboBoxFireResistanceLimit);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "LableFireResistanceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
