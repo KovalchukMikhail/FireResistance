@@ -498,6 +498,7 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonCancel.Location = new System.Drawing.Point(510, 621);
             this.buttonCancel.Name = "buttonCancel";
@@ -522,6 +523,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
+            this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(642, 663);
             this.Controls.Add(this.buttonСalculation);
             this.Controls.Add(this.buttonCancel);
@@ -564,8 +566,12 @@
             this.Controls.Add(this.labelLenthElement);
             this.Controls.Add(this.LablefireResistanceLimit);
             this.Controls.Add(this.comboBoxFireResistanceLimit);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "LableFireResistanceForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Проверка предела огнестойкости";
             this.Load += new System.EventHandler(this.LableMetr_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
