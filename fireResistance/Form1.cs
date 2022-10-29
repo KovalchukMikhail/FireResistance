@@ -17,8 +17,9 @@ namespace fireResistance
             InitializeComponent();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxFireResistanceLimit_SelectedIndexChanged(object sender, EventArgs e)
         {
+            MessageBox.Show(comboBoxFireResistanceLimit.Text);
 
         }
 
@@ -37,7 +38,7 @@ namespace fireResistance
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBoxHeightElement_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -57,7 +58,7 @@ namespace fireResistance
 
         }
 
-        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void comboBoxConcreteClass_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
         }
@@ -72,7 +73,7 @@ namespace fireResistance
 
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
+        private void textBoxStrength_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -83,6 +84,59 @@ namespace fireResistance
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonСalculation_Click(object sender, EventArgs e)
+        {
+            Controller run = new Controller();
+            run.Run(comboBoxFireResistanceLimit.Text, Convert.ToDouble(textBoxLenthElement.Text), Convert.ToDouble(textBoxHeightElement.Text), Convert.ToDouble(textBoxWidthElement.Text),
+                Convert.ToDouble(textBoxLenthFromArmatureToEdge.Text), comboBoxFixationElement.Text, comboBoxArmatureClass.Text, comboBoxConcreteType.Text,
+                comboBoxConcreteClass.Text, Convert.ToInt32(comboBoxArmatureDiameter.Text), Convert.ToInt32(comboBoxArmatureAmount.Text), Convert.ToDouble(textBoxMoment.Text), Convert.ToDouble(textBoxStrength.Text));
+        }
+
+        private void comboBoxFixationElement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxLenthElement_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxWidthElement_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxLenthFromArmatureToEdge_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxArmatureClass_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxConcreteType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxArmatureDiameter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxArmatureAmount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxMoment_TextChanged(object sender, EventArgs e)
         {
 
         }
