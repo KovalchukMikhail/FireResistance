@@ -91,7 +91,7 @@ namespace fireResistance
         private void buttonСalculation_Click(object sender, EventArgs e)
         {
             Controller run = new Controller();
-            run.Run(comboBoxFireResistanceLimit.Text, Convert.ToDouble(textBoxLenthElement.Text), Convert.ToDouble(textBoxHeightElement.Text), Convert.ToDouble(textBoxWidthElement.Text),
+            run.RunFireResistanceColumn(comboBoxFireResistanceLimit.Text, Convert.ToDouble(textBoxLenthElement.Text), Convert.ToDouble(textBoxHeightElement.Text), Convert.ToDouble(textBoxWidthElement.Text),
                 Convert.ToDouble(textBoxLenthFromArmatureToEdge.Text), comboBoxFixationElement.Text, comboBoxArmatureClass.Text, comboBoxConcreteType.Text,
                 comboBoxConcreteClass.Text, Convert.ToInt32(comboBoxArmatureDiameter.Text), Convert.ToInt32(comboBoxArmatureAmount.Text), Convert.ToDouble(textBoxMoment.Text), Convert.ToDouble(textBoxStrength.Text));
         }
