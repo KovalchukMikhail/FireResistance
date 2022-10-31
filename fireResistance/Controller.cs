@@ -19,9 +19,10 @@ namespace fireResistance
 
             data.Сalculation();
 
-            string text = $"{comboBoxFireResistanceLimit} {lenthElement} {heightElement} {widthElement} {lenthFromArmatureToEdge} {fixationElement} {armatureClass} {concreteType} " +
-                            $"{concreteClass} {armatureDiameter} {armatureAmount} {moment} {strength}";
+            //string text = $"{comboBoxFireResistanceLimit} {lenthElement} {heightElement} {widthElement} {lenthFromArmatureToEdge} {fixationElement} {armatureClass} {concreteType} " +
+            //                $"{concreteClass} {armatureDiameter} {armatureAmount} {moment} {strength}";
 
+            string text = Convert.ToString(data.gammaBT);
 
             MessageBox.Show(text);
         }

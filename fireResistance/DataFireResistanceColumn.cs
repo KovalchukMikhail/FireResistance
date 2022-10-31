@@ -85,6 +85,8 @@ namespace fireResistance
             this.armatureAmount = armatureAmount;
             this.moment = moment;
             this.strength = strength;
+
+            gammaBT = Interpolation.interpolationColumn(DataFromeSP468.concreteType, DataFromeSP468.temperature, concreteType, "550", DataFromeSP468.sheetGammaBT);
         }
 
         public void Сalculation()
