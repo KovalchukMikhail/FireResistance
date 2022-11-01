@@ -23,8 +23,8 @@ namespace fireResistance
         public double strength;
         public double armatureSquare; //площадь арматуры
         public double concreteResistNormative; // Нормативное Сопротивление бетона
-        public double temperatureArmature; // Температура на расстоянии а от обогреваемой поверхности
-        public double temperatureConcrete; // Температура бетона
+        public string temperatureArmature; // Температура на расстоянии а от обогреваемой поверхности
+        public string temperatureConcrete; // Температура бетона
         public double gammaBT; // коэф. гамма б т
         public double betaB; // коэф. бета б
         public double concreteResistWithTemperatureNormative; // Нормативное сопративление бетона осевому сжатию с учетом действия температуры
@@ -36,7 +36,7 @@ namespace fireResistance
         public double armatureResistSqueezeWithTemperatureСalculation; // Расчетное сопротивление арматуры сжатию с учетом температуры
         public double armatureResistStretchСalculation; // Расчетное сопротивление арматуры растяжению
         public double armatureResistStretchWithTemperatureСalculation; // Расчетное сопротивление арматуры растяжению с учетом температуры
-        public double armatureElasticityModulus; // Модуль деформации арматуры
+        public double armatureElasticityModulus = 200000; // Модуль деформации арматуры
         public double concreteStartElasticityModulus; // Начальный модуль деформации бетона
         public double deepConcreteWarming; // Глубина прогрева бетона до критической температуры
         public double workHeight; // Рабочая высота сечения
@@ -45,10 +45,10 @@ namespace fireResistance
         public double squareChangedProfile; // Площадь приведенного поперечного сечения
         public double workHeightProfileWithWarming; // Рабочая высота сечения при нагреве
         public double randomEccentricity; // Случайный эксцентриситет
-        public double randomEccentricityStrength; // Эксцентриситет продольной силы относительно центра тяжести
+        public double eccentricityStrength; // Эксцентриситет продольной силы относительно центра тяжести
         public double relativelyEccentricityStrength; // Относительное значение эксцентриситета продольной силы
-        public double workLenth; // Рабочая высота сечения
-        public double fiL; // Коэффициент учитывающий влияние длительности действия нагрузки
+        public double workLenth; // Рабочая длинна сечения
+        public double fiL = 2; // Коэффициент учитывающий влияние длительности действия нагрузки
         public double momentOfInertiaConcrete; // Момент инерции бетонного сечения относительно центра тяжести приведенного сечения
         public double momentOfInertiaArmature; // Момент инерции арматуры относительно центра тяжести сечения элемента
         public double armatureElasticityModulusWithWarming; // Модуль деформации арматуры при нагреве
@@ -83,14 +83,50 @@ namespace fireResistance
             this.concreteClass = concreteClass;
             this.armatureDiameter = armatureDiameter;
             this.armatureAmount = armatureAmount;
-            this.moment = moment;
-            this.strength = strength;
+            this.moment = moment / 0.00000010197162123;
+            this.strength = strength / 0.00010197162123;
 
-            gammaBT = Interpolation.interpolationColumn(DataFromeSP468.concreteType, DataFromeSP468.temperature, concreteType, "550", DataFromeSP468.sheetGammaBT);
         }
 
         public void Сalculation()
         {
+            armatureSquare = DataArmatureInfo.sheetArmatureDiameter[armatureDiameter] * armatureAmount;
+            concreteResistNormative = DataFromSP63.sheetConcreteResistNormative[concreteClass];
+            temperatureArmature = "450";//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
+            temperatureConcrete = "450";//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
+            gammaBT = Interpolation.interpolationColumn(DataFromeSP468.concreteTypeForSheet, DataFromeSP468.temperatureForSheet, concreteType, temperatureConcrete, DataFromeSP468.sheetGammaBT);
+            betaB = Interpolation.interpolationColumn(DataFromeSP468.concreteTypeForSheet, DataFromeSP468.temperatureForSheet, concreteType, temperatureConcrete, DataFromeSP468.sheetBetaB);
+            concreteResistWithTemperatureNormative = concreteResistNormative * gammaBT;
+            gammaST = Interpolation.interpolationColumn(DataFromeSP468.armatureClassForSheet, DataFromeSP468.temperatureForSheet, armatureClass, temperatureArmature, DataFromeSP468.sheetGammaSt);
+            betaS = Interpolation.interpolationColumn(DataFromeSP468.armatureClassForSheet, DataFromeSP468.temperatureForSheet, armatureClass, temperatureArmature, DataFromeSP468.sheetBetaS);
+            armatureResistNormative = DataFromSP63.sheetArmatureResistNormative[armatureClass];
+            armatureResistWithTemperatureNormative = armatureResistNormative * gammaST;
+            armatureResistSqueezeСalculation = DataFromSP63.sheetArmatureResistSqueezeСalculation[armatureClass];
+            armatureResistSqueezeWithTemperatureСalculation = armatureResistSqueezeСalculation * gammaST;
+            armatureResistStretchСalculation = DataFromSP63.sheetArmatureResistStretchСalculation[armatureClass];
+            armatureResistStretchWithTemperatureСalculation = armatureResistStretchСalculation * gammaST;
+            concreteStartElasticityModulus = DataFromSP63.sheetConcreteStartElasticityModulus[concreteClass];
+            deepConcreteWarming = 60;//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
+            workHeight = heightElement - lenthFromArmatureToEdge;
+            heightProfileWithWarming = heightElement - 2 * deepConcreteWarming;
+            workWidthWithWarming = widthElement - 2 * deepConcreteWarming;
+            squareChangedProfile = 0.9 * heightProfileWithWarming * workWidthWithWarming;
+            workHeightProfileWithWarming = workHeight - deepConcreteWarming;
+            randomEccentricity = Math.Max(Math.Max(lenthElement/600, heightElement/30), 10);
+
+            if (moment / strength > randomEccentricity) eccentricityStrength = moment / strength;
+            else eccentricityStrength = randomEccentricity;
+
+            if (eccentricityStrength / heightProfileWithWarming < 0.15) relativelyEccentricityStrength = 0.15;
+            else if (eccentricityStrength / heightProfileWithWarming > 1.5) relativelyEccentricityStrength = 1.5;
+            else relativelyEccentricityStrength = eccentricityStrength / heightProfileWithWarming;
+
+            workLenth = DataFromeSP468.FixationElementSheet[fixationElement] * lenthElement;
+            momentOfInertiaConcrete = workWidthWithWarming * Math.Pow(heightProfileWithWarming, 3) / 12;
+            momentOfInertiaArmature = armatureSquare * Math.Pow(heightElement - 2 * lenthFromArmatureToEdge, 2) / 2;
+            armatureElasticityModulusWithWarming =
+            concreteElasticityModulusWithWarming =
+
 
         }
     }

@@ -22,7 +22,7 @@ namespace fireResistance
             //string text = $"{comboBoxFireResistanceLimit} {lenthElement} {heightElement} {widthElement} {lenthFromArmatureToEdge} {fixationElement} {armatureClass} {concreteType} " +
             //                $"{concreteClass} {armatureDiameter} {armatureAmount} {moment} {strength}";
 
-            string text = Convert.ToString(data.gammaBT);
+            string text = Convert.ToString(data.workLenth) + "  " + Convert.ToString(data.momentOfInertiaConcrete) + "  " + Convert.ToString(data.momentOfInertiaArmature) + "  " + Convert.ToString(data.workWidthWithWarming) + "  " + Convert.ToString(data.squareChangedProfile) + "  " + Convert.ToString(data.workHeightProfileWithWarming) + "  " + Convert.ToString(data.randomEccentricity);
 
             MessageBox.Show(text);
         }

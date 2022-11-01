@@ -8,13 +8,13 @@ namespace fireResistance
 {
     public class DataFromeSP468
     {
-        public static Dictionary<string, int> concreteType = new Dictionary<string, int>()
+        public static Dictionary<string, int> concreteTypeForSheet = new Dictionary<string, int>()
         {
             {"ТЯЖЕЛЫЙ, НА СИЛИКАТНОМ ЗАПОЛНИТЕЛЕ", 0},
             {"ТЯЖЕЛЫЙ, НА КАРБОНАТНОМ ЗАПОЛНИТЕЛЕ", 1},
             {"КОНСТРУКЦИОННЫЙ КЕРАМЗИТОБЕТОН", 2}
         };
-        public static Dictionary<string, double> armatureClass = new Dictionary<string, double>()
+        public static Dictionary<string, int> armatureClassForSheet = new Dictionary<string, int>()
         {
             {"A240", 0},
             {"А400", 1},
@@ -28,7 +28,7 @@ namespace fireResistance
             {"А500С МАРКИ Ст3Гпс ТЕРМОМЕХАНИЧЕСКИ УПРОЧНЕННАЯ ПО ГОСТ 34028-2016", 9}
         };
 
-        public static Dictionary<string, int> temperature = new Dictionary<string, int>()
+        public static Dictionary<string, int> temperatureForSheet = new Dictionary<string, int>()
         {
             {"20", 0},
             {"200", 1},
@@ -73,7 +73,7 @@ namespace fireResistance
 
         // Коэффициент бета_СТ. Данные из таблицы 5.6 СП468
         public static double[,] sheetBetaS =
-{
+        {
             {1.0, 0.92, 0.9, 0.85, 0.80, 0.77, 0.72, 0.65},
             {1.0, 0.92, 0.9, 0.85, 0.80, 0.77, 0.72, 0.65},
             {1.0, 0.92, 0.9, 0.85, 0.80, 0.77, 0.72, 0.65},
@@ -84,6 +84,13 @@ namespace fireResistance
             {1.0, 1.0, 1.0, 0.99, 0.94, 0.93, 0.77, 0.6},
             {1.0, 0.99, 0.99, 0.91, 0.91, 0.83, 0.72, 0.65},
             {1.0, 1.0, 1.0, 0.98, 0.93, 0.88, 0.82, 0.67}
+        };
+
+        public static Dictionary<string, double> FixationElementSheet = new Dictionary<string, double>()
+        {
+            {"НЕ СМЕЩАЕМАЯ ЗАДЕЛКА НА ДВУХ КОНЦАХ", 0.5},
+            {"НЕ СМЕЩАЕМАЯ ЗАДЕЛКА НА ДВУХ КОНЦАХ С ПОДАТЛИВЫМ ОГРАНИЧЕННЫМ ПОВОРОТОМ", 0.8},
+            {"ШАРНИРНЫЕ ОПОРЫ НА ДВУХ КОНЦАХ", 1}
         };
     }
 }
