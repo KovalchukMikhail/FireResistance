@@ -92,8 +92,8 @@ namespace fireResistance
         {
             armatureSquare = DataArmatureInfo.sheetArmatureDiameter[armatureDiameter] * armatureAmount;
             concreteResistNormative = DataFromSP63.sheetConcreteResistNormative[concreteClass];
-            temperatureArmature = "450";//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
-            temperatureConcrete = "450";//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
+            temperatureArmature = "600";//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
+            temperatureConcrete = "500";//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
             gammaBT = Interpolation.interpolationColumn(DataFromeSP468.concreteTypeForSheet, DataFromeSP468.temperatureForSheet, concreteType, temperatureConcrete, DataFromeSP468.sheetGammaBT);
             betaB = Interpolation.interpolationColumn(DataFromeSP468.concreteTypeForSheet, DataFromeSP468.temperatureForSheet, concreteType, temperatureConcrete, DataFromeSP468.sheetBetaB);
             concreteResistWithTemperatureNormative = concreteResistNormative * gammaBT;
@@ -124,8 +124,10 @@ namespace fireResistance
             workLenth = DataFromeSP468.FixationElementSheet[fixationElement] * lenthElement;
             momentOfInertiaConcrete = workWidthWithWarming * Math.Pow(heightProfileWithWarming, 3) / 12;
             momentOfInertiaArmature = armatureSquare * Math.Pow(heightElement - 2 * lenthFromArmatureToEdge, 2) / 2;
-            armatureElasticityModulusWithWarming =
-            concreteElasticityModulusWithWarming =
+            armatureElasticityModulusWithWarming = armatureElasticityModulus * betaS;
+            concreteElasticityModulusWithWarming = concreteStartElasticityModulus * betaB;
+            FlexuralStiffness = 0.15 * concreteElasticityModulusWithWarming * momentOfInertiaConcrete / (fiL * (0.3 + relativelyEccentricityStrength)) + 0.7 * armatureElasticityModulusWithWarming * momentOfInertiaArmature;
+            strengthCritical = Math.Pow(Math.PI, 2) * FlexuralStiffness / Math.Pow(workLenth, 2);
 
 
         }
