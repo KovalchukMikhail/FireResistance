@@ -46,6 +46,7 @@ namespace fireResistance
         public double workHeightProfileWithWarming; // Рабочая высота сечения при нагреве
         public double randomEccentricity; // Случайный эксцентриситет
         public double eccentricityStrength; // Эксцентриситет продольной силы относительно центра тяжести
+        public double eccentricityTemperature = 0; // Температурный эксцентриситет, при 4 стороннем нагреве равно 0
         public double relativelyEccentricityStrength; // Относительное значение эксцентриситета продольной силы
         public double workLenth; // Рабочая длинна сечения
         public double fiL = 2; // Коэффициент учитывающий влияние длительности действия нагрузки
@@ -60,8 +61,12 @@ namespace fireResistance
         public double relativeDeformationArmature; // Относительная деформация растянутой арматуры
         public double relativeDeformationConcrete; // Относительная деформация сжатого бетона
         public double boundaryRelativeHeightSqueezeZone; // Граничная относительная высота сжатой зоны
-        public double heightSqueezeZone; // Высота сжатой зоны в случае когда относительная высота сжатой зоны меньше граничной относительной высоты сжатой зоны
+        public double heightSqueezeZoneFirst; // Высота сжатой зоны в случае когда относительная высота сжатой зоны меньше граничной относительной высоты сжатой зоны
+        public double heightSqueezeZoneSecond; // Высота сжатой зоны в случае когда относительная высота сжатой зоны больше граничной относительной высоты сжатой зоны
+        public double heightSqueezeZone; // Высота сжатой зоны после проверки условия
         public double relativeHeightSqueezeZone; // Относительная высота сжатой зоны
+        public double demandLeftPart; // левая часть условия
+        public double demandRightPart; // правая часть условия
         public double result;
 
 
@@ -128,8 +133,21 @@ namespace fireResistance
             concreteElasticityModulusWithWarming = concreteStartElasticityModulus * betaB;
             FlexuralStiffness = 0.15 * concreteElasticityModulusWithWarming * momentOfInertiaConcrete / (fiL * (0.3 + relativelyEccentricityStrength)) + 0.7 * armatureElasticityModulusWithWarming * momentOfInertiaArmature;
             strengthCritical = Math.Pow(Math.PI, 2) * FlexuralStiffness / Math.Pow(workLenth, 2);
+            deflectionСoefficient = 1 / (1 - strength / strengthCritical); // проверить
+            finalEccentricity = eccentricityStrength * deflectionСoefficient + 0.5 * (workHeightProfileWithWarming - lenthFromArmatureToEdge) + eccentricityTemperature; // проверить
+            relativeDeformationArmature = armatureResistStretchWithTemperatureСalculation / armatureElasticityModulusWithWarming; // проверить
+            boundaryRelativeHeightSqueezeZone = 0.8 / (1 + relativeDeformationArmature / 0.0035);
+            heightSqueezeZoneFirst = (strength + armatureResistWithTemperatureNormative * armatureSquare - armatureResistSqueezeWithTemperatureСalculation * armatureSquare) / (concreteResistWithTemperatureNormative * workWidthWithWarming);
+            heightSqueezeZoneSecond = (strength + armatureResistWithTemperatureNormative * armatureSquare * (1 + boundaryRelativeHeightSqueezeZone) / (1 - boundaryRelativeHeightSqueezeZone) - armatureResistSqueezeWithTemperatureСalculation * armatureSquare) /
+                                            (concreteResistWithTemperatureNormative * workWidthWithWarming + 2 * armatureResistWithTemperatureNormative * armatureSquare / (workHeightProfileWithWarming * (1 - boundaryRelativeHeightSqueezeZone)));
+            relativeHeightSqueezeZone = heightSqueezeZoneFirst / workHeightProfileWithWarming;
+            
+            if (relativeHeightSqueezeZone <= boundaryRelativeHeightSqueezeZone) heightSqueezeZone = heightSqueezeZoneFirst;
+            else heightSqueezeZone = heightSqueezeZoneSecond;
 
-
+            demandLeftPart = strength * finalEccentricity;
+            demandRightPart = concreteResistWithTemperatureNormative * workWidthWithWarming * heightSqueezeZone * (workHeightProfileWithWarming - 0.5 * heightSqueezeZone) + armatureResistSqueezeWithTemperatureСalculation * armatureSquare * (workHeight - lenthFromArmatureToEdge);
+            result = demandLeftPart / demandRightPart;
         }
     }
 }
