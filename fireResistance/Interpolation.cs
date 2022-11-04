@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace fireResistance
 {
@@ -68,5 +70,36 @@ namespace fireResistance
             return result;
         }
 
+        public static string interpolationTemperatureSheet(double[,] sheet, Dictionary<string, int> DictWithKeyIsText, string value)
+        {
+
+            double valueIndex = CheckValue(value, DictWithKeyIsText);
+            double result = 0;
+            double resultColumnFirst;
+            double resultColumnSecond;
+            MessageBox.Show($"{valueIndex}");
+
+            if (valueIndex == Math.Truncate(valueIndex))
+            {
+                result = sheet[Convert.ToInt32(valueIndex), Convert.ToInt32(valueIndex)];
+            }
+            else
+            {
+                double valueFirst = sheet[Convert.ToInt32(Math.Truncate(valueIndex)), Convert.ToInt32(Math.Truncate(valueIndex))];
+                double valueSecond = sheet[Convert.ToInt32(Math.Truncate(valueIndex)), Convert.ToInt32(Math.Truncate(valueIndex)) + 1];
+                
+                resultColumnFirst = valueFirst - Math.Abs(valueFirst - valueSecond) * (valueIndex - Math.Truncate(valueIndex));
+
+                valueFirst = sheet[Convert.ToInt32(Math.Truncate(valueIndex)) + 1, Convert.ToInt32(Math.Truncate(valueIndex))];
+                valueSecond = sheet[Convert.ToInt32(Math.Truncate(valueIndex)) + 1, Convert.ToInt32(Math.Truncate(valueIndex)) + 1];
+
+                resultColumnSecond = valueFirst - Math.Abs(valueFirst - valueSecond) * (valueIndex - Math.Truncate(valueIndex));
+
+                result = resultColumnFirst - (resultColumnFirst - resultColumnSecond) * (valueIndex - Math.Truncate(valueIndex));
+                
+                MessageBox.Show($"{valueIndex} {resultColumnFirst} {resultColumnSecond}");
+            }
+            return Convert.ToString(Math.Round(result,0));
+        }
     }
 }

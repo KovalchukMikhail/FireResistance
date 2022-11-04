@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,47 @@ namespace fireResistance
 {
     public class Temperature
     {
-        public static double[,] h200T30 =
+        public static Dictionary<string, int> lenthFromArmatureToEdgeSheet200 = new Dictionary<string, int>()
+        {
+            {"0", 0},
+            {"10", 1},
+            {"20", 2},
+            {"30", 3},
+            {"40", 4},
+            {"50", 5},
+            {"60", 6},
+            {"70", 7},
+            {"80", 8},
+            {"90", 9},
+            {"100", 10}
+        };
+
+        public static Dictionary<string, int> lenthFromArmatureToEdgeSheet300 = new Dictionary<string, int>()
+        {
+            {"0", 0},
+            {"30", 1},
+            {"60", 2},
+            {"90", 3},
+            {"120", 4},
+            {"150", 5}
+        };
+
+        public static Dictionary<string, int> lenthFromArmatureToEdgeSheet400 = new Dictionary<string, int>()
+        {
+            {"0", 0},
+            {"20", 1},
+            {"40", 2},
+            {"60", 3},
+            {"80", 4},
+            {"100", 5},
+            {"120", 6},
+            {"140", 7},
+            {"160", 8},
+            {"180", 9},
+            {"200", 10}
+        };
+
+        public static double[,] h200R30 =
         {
             {824, 767, 735, 710, 692, 679, 671, 666, 663, 662, 661},
             {767, 670, 600, 550, 515, 492, 476, 467, 462, 460, 459},
@@ -23,7 +64,7 @@ namespace fireResistance
             {661, 459, 311, 202, 128, 89, 70, 58, 50, 46, 45}
         };
 
-        public static double[,] h200T60 =
+        public static double[,] h200R60 =
         {
             {932, 915, 900, 887, 877, 868, 862, 857, 853, 851, 851},
             {915, 858, 812, 775, 746, 724, 706, 694, 685, 680, 678},
@@ -38,7 +79,7 @@ namespace fireResistance
             {851, 678, 541, 430, 341, 268, 209, 162, 130, 114, 109}
         };
 
-        public static double[,] h200T90 =
+        public static double[,] h200R90 =
         {
             {1000, 988, 979, 971, 964, 958, 953, 950, 947, 946, 945},
             {988, 949, 915, 887, 864, 845, 830, 819, 811, 806, 805},
@@ -53,7 +94,7 @@ namespace fireResistance
             {945, 805, 688, 593, 514, 451, 402, 364, 338, 322, 317}
         };
 
-        public static double[,] h200T120 =
+        public static double[,] h200R120 =
         {
             {1045, 1037, 1031, 1025, 1020, 1016, 1013, 1010, 1008, 1007, 1007},
             {1037, 1008, 982, 961, 943, 928, 916, 907, 901, 897, 895},
@@ -68,7 +109,7 @@ namespace fireResistance
             {1007, 895, 798, 716, 650, 596, 553, 521, 499, 486, 481}
         };
 
-        public static double[,] h200T150 =
+        public static double[,] h200R150 =
         {
             {1077, 1074, 1070, 1068, 1064, 1060, 1055, 1053, 1050, 1048, 1046},
             {1074, 1055, 1035, 1066, 997, 985, 970, 959, 948, 942, 933},
@@ -83,7 +124,7 @@ namespace fireResistance
             {1046, 933, 820, 740, 660, 615, 570, 550, 530, 515, 500}
         };
 
-        public static double[,] h300T30 =
+        public static double[,] h300R30 =
         {
             {827, 700, 650, 640, 630, 620},
             {700, 380, 250, 200, 200, 200},
@@ -93,7 +134,7 @@ namespace fireResistance
             {620, 200, 90, 70, 55, 45}
         };
 
-        public static double[,] h300T60 =
+        public static double[,] h300R60 =
         {
             {933, 850, 820, 790, 780, 780},
             {850, 630, 500, 420, 400, 400},
@@ -103,7 +144,7 @@ namespace fireResistance
             {780, 400, 190, 90, 80, 70}
         };
 
-        public static double[,] h300T90 =
+        public static double[,] h300R90 =
         {
             {1002, 950, 910, 910, 910, 910},
             {950, 750, 610, 550, 500, 500},
@@ -113,7 +154,7 @@ namespace fireResistance
             {910, 500, 290, 170, 100, 90}
         };
 
-        public static double[,] h300T120 =
+        public static double[,] h300R120 =
         {
             {1046, 1010, 990, 950, 930, 920},
             {1010, 870, 750, 690, 630, 600},
@@ -123,7 +164,7 @@ namespace fireResistance
             {920, 600, 400, 250, 180, 150}
         };
 
-        public static double[,] h300T150 =
+        public static double[,] h300R150 =
         {
             {1077, 1045, 1020, 985, 975, 970},
             {1045, 925, 825, 750, 710, 695},
@@ -133,7 +174,7 @@ namespace fireResistance
             {970, 695, 495, 325, 275, 255}
         };
 
-        public static double[,] h400T30 =
+        public static double[,] h400R30 =
         {
             {827, 723, 690, 670, 662, 660, 659, 659, 659, 659, 659},
             {723, 491, 378, 329, 311, 306, 304, 304, 304, 304, 304},
@@ -148,7 +189,7 @@ namespace fireResistance
             {659, 304, 130, 62, 38, 27, 23, 21, 20, 20, 20}
         };
 
-        public static double[,] h400T60 =
+        public static double[,] h400R60 =
         {
             {933, 894, 877, 861, 853, 848, 846, 845, 844, 844, 844},
             {894, 734, 634, 574, 540, 522, 513, 509, 508, 508, 507},
@@ -163,7 +204,7 @@ namespace fireResistance
             {844, 507, 293, 153, 84, 56, 40, 31, 27, 25, 24}
         };
 
-        public static double[,] h400T90 =
+        public static double[,] h400R90 =
         {
             {1002, 974, 964, 952, 944, 939, 936, 935, 934, 933, 933},
             {974, 855, 769, 712, 674, 651, 637, 629, 625, 623, 623},
@@ -178,7 +219,7 @@ namespace fireResistance
             {933, 623, 408, 257, 151, 93, 68, 53, 44, 39, 38}
         };
 
-        public static double[,] h400T120 =
+        public static double[,] h400R120 =
         {
             {1046, 1026, 1018, 1008, 1002, 998, 995, 993, 992, 992, 992},
             {1026, 932, 859, 805, 768, 741, 724, 714, 707, 704, 703},
@@ -193,7 +234,7 @@ namespace fireResistance
             {992, 703, 495, 341, 227, 144, 99, 79, 67, 61, 59}
         };
 
-        public static double[,] h400T150 =
+        public static double[,] h400R150 =
         {
             {1077, 1060, 1054, 1045, 1040, 1036, 1033, 1031, 1030, 1030, 1030},
             {1060, 980, 916, 867, 832, 806, 788, 776, 768, 764, 763},
@@ -206,6 +247,26 @@ namespace fireResistance
             {1030, 768, 570, 421, 309, 223, 165, 128, 105, 94, 90},
             {1030, 764, 563, 412, 298, 212, 153, 116, 94, 84, 82},
             {1030, 763, 561, 410, 295, 208, 149, 112, 90, 81, 79}
+        };
+
+
+        public static Dictionary<string, double[,]> chooseArrayTemperature = new Dictionary<string, double[,]>
+        {
+            {"200_R30",  h200R30},
+            {"200_R60",  h200R60},
+            {"200_R90",  h200R90},
+            {"200_R120",  h200R120},
+            {"200_R150",  h200R150},
+            {"300_R30",  h300R30},
+            {"300_R60",  h300R60},
+            {"300_R90",  h300R90},
+            {"300_R120",  h300R120},
+            {"300_R150",  h300R150},
+            {"400_R30",  h400R30},
+            {"400_R60",  h400R60},
+            {"400_R90",  h400R90},
+            {"400_R120",  h400R120},
+            {"400_R150",  h400R150}
         };
 
     }

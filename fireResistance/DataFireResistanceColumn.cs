@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace fireResistance
 {
@@ -93,11 +94,55 @@ namespace fireResistance
 
         }
 
+        public string ChooseTemperature(string fireResistanceVolume, double lenthFromArmatureToEdge, double widthElement, double heightElement = 0)
+        {
+            double width;
+
+            if (heightElement != 0) width = Math.Min(heightElement, widthElement);
+            else width = widthElement;
+            string temperature =string.Empty;
+
+            if (width == 200)
+            {
+                foreach(var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"200_{fireResistanceVolume}"))
+                    {
+                        MessageBox.Show(name.Key);
+                        temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet200, Convert.ToString(lenthFromArmatureToEdge));
+                    }
+                }
+            }
+            else if (width == 300)
+            {
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
+                    {
+                        MessageBox.Show(name.Key);
+                        temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet300, Convert.ToString(lenthFromArmatureToEdge));
+                    }
+                }
+            }
+            else if (width >= 400)
+            {
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"400_{fireResistanceVolume}"))
+                    {
+                        MessageBox.Show(name.Key);
+                        temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet400, Convert.ToString(lenthFromArmatureToEdge));
+                    }
+                }
+            }
+            return temperature;
+        }
+
         public void Сalculation()
         {
             armatureSquare = DataArmatureInfo.sheetArmatureDiameter[armatureDiameter] * armatureAmount;
             concreteResistNormative = DataFromSP63.sheetConcreteResistNormative[concreteClass];
-            temperatureArmature = "600";//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
+            temperatureArmature = ChooseTemperature(fireResistanceVolume, lenthFromArmatureToEdge, widthElement, heightElement);//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
             temperatureConcrete = "500";//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
             gammaBT = Interpolation.interpolationColumn(DataFromeSP468.concreteTypeForSheet, DataFromeSP468.temperatureForSheet, concreteType, temperatureConcrete, DataFromeSP468.sheetGammaBT);
             betaB = Interpolation.interpolationColumn(DataFromeSP468.concreteTypeForSheet, DataFromeSP468.temperatureForSheet, concreteType, temperatureConcrete, DataFromeSP468.sheetBetaB);

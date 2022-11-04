@@ -22,7 +22,7 @@ namespace fireResistance
             //string text = $"{comboBoxFireResistanceLimit} {lenthElement} {heightElement} {widthElement} {lenthFromArmatureToEdge} {fixationElement} {armatureClass} {concreteType} " +
             //                $"{concreteClass} {armatureDiameter} {armatureAmount} {moment} {strength}";
 
-            string text = Convert.ToString(data.boundaryRelativeHeightSqueezeZone) + "  " + Convert.ToString(data.workHeightProfileWithWarming) + "  " + Convert.ToString(data.relativeHeightSqueezeZone) + "  " + Convert.ToString(data.heightSqueezeZoneFirst) + "  " + Convert.ToString(data.heightSqueezeZoneSecond) + "  " + Convert.ToString(data.heightSqueezeZone) + "  " + Convert.ToString(data.demandLeftPart) + "  " + Convert.ToString(data.demandRightPart) + "  " + Convert.ToString(data.result);
+            string text = Convert.ToString(data.temperatureArmature);
 
             MessageBox.Show(text);
         }
