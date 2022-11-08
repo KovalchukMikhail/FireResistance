@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace fireResistance
 {
@@ -94,13 +95,15 @@ namespace fireResistance
 
         }
 
-        public string ChooseTemperature(string fireResistanceVolume, double lenthFromArmatureToEdge, double widthElement, double heightElement = 0)
+        public string ChooseTemperatureArmature(string fireResistanceVolume, double lenthFromArmatureToEdge, double widthElement, double heightElement = 0)
         {
             double width;
 
             if (heightElement != 0) width = Math.Min(heightElement, widthElement);
             else width = widthElement;
-            string temperature =string.Empty;
+            string temperature = string.Empty;
+            string temperatureFirst = string.Empty;
+            string temperatureSecond = string.Empty;
 
             if (width == 200)
             {
@@ -108,7 +111,7 @@ namespace fireResistance
                 {
                     if (name.Key.EndsWith($"200_{fireResistanceVolume}"))
                     {
-                        MessageBox.Show(name.Key);
+                        MessageBox.Show($"{name.Key} один");
                         temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet200, Convert.ToString(lenthFromArmatureToEdge));
                     }
                 }
@@ -119,7 +122,7 @@ namespace fireResistance
                 {
                     if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
                     {
-                        MessageBox.Show(name.Key);
+                        MessageBox.Show($"{name.Key} один");
                         temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet300, Convert.ToString(lenthFromArmatureToEdge));
                     }
                 }
@@ -130,10 +133,54 @@ namespace fireResistance
                 {
                     if (name.Key.EndsWith($"400_{fireResistanceVolume}"))
                     {
-                        MessageBox.Show(name.Key);
+                        MessageBox.Show($"{name.Key} один");
                         temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet400, Convert.ToString(lenthFromArmatureToEdge));
                     }
                 }
+            }
+            else if (width > 200 && width < 300)
+            {
+                foreach(var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"200_{fireResistanceVolume}"))
+                    {
+                        temperatureFirst = ChooseTemperature(fireResistanceVolume, lenthFromArmatureToEdge, 200);
+                        MessageBox.Show($"результат для h200 {temperatureFirst}");
+                    }
+                }
+
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
+                    {
+                        temperatureSecond = ChooseTemperature(fireResistanceVolume, lenthFromArmatureToEdge, 300);
+                        MessageBox.Show($"результат для h300 {temperatureSecond}");
+                    }
+                }
+                temperature = Convert.ToString(Math.Round(Convert.ToInt32(temperatureFirst) - (width - 200) / 100 * (Convert.ToInt32(temperatureFirst) - Convert.ToInt32(temperatureSecond)), 0));
+                if (Convert.ToInt32(temperature) > Convert.ToInt32(temperatureFirst)) temperature = temperatureFirst;
+            }
+            else if (width > 300 && width < 400)
+            {
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
+                    {
+                        temperatureFirst = ChooseTemperature(fireResistanceVolume, lenthFromArmatureToEdge, 300);
+                        MessageBox.Show($"результат для h300 {temperatureFirst}");
+                    }
+                }
+
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"400_{fireResistanceVolume}"))
+                    {
+                        temperatureSecond = ChooseTemperature(fireResistanceVolume, lenthFromArmatureToEdge, 400);
+                        MessageBox.Show($"результат для h400 {temperatureSecond}");
+                    }
+                }
+                temperature = Convert.ToString(Math.Round(Convert.ToInt32(temperatureFirst) - (width - 300) / 100 * (Convert.ToInt32(temperatureFirst) - Convert.ToInt32(temperatureSecond)), 0));
+                if (Convert.ToInt32(temperature) > Convert.ToInt32(temperatureFirst)) temperature = temperatureFirst;
             }
             return temperature;
         }
@@ -142,7 +189,7 @@ namespace fireResistance
         {
             armatureSquare = DataArmatureInfo.sheetArmatureDiameter[armatureDiameter] * armatureAmount;
             concreteResistNormative = DataFromSP63.sheetConcreteResistNormative[concreteClass];
-            temperatureArmature = ChooseTemperature(fireResistanceVolume, lenthFromArmatureToEdge, widthElement, heightElement);//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
+            temperatureArmature = ChooseTemperatureArmature(fireResistanceVolume, lenthFromArmatureToEdge, widthElement, heightElement);
             temperatureConcrete = "500";//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
             gammaBT = Interpolation.interpolationColumn(DataFromeSP468.concreteTypeForSheet, DataFromeSP468.temperatureForSheet, concreteType, temperatureConcrete, DataFromeSP468.sheetGammaBT);
             betaB = Interpolation.interpolationColumn(DataFromeSP468.concreteTypeForSheet, DataFromeSP468.temperatureForSheet, concreteType, temperatureConcrete, DataFromeSP468.sheetBetaB);

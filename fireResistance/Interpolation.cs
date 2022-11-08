@@ -77,7 +77,7 @@ namespace fireResistance
             double result = 0;
             double resultColumnFirst;
             double resultColumnSecond;
-            MessageBox.Show($"{valueIndex}");
+            MessageBox.Show($"{valueIndex} два");
 
             if (valueIndex == Math.Truncate(valueIndex))
             {
@@ -97,7 +97,7 @@ namespace fireResistance
 
                 result = resultColumnFirst - (resultColumnFirst - resultColumnSecond) * (valueIndex - Math.Truncate(valueIndex));
                 
-                MessageBox.Show($"{valueIndex} {resultColumnFirst} {resultColumnSecond}");
+                MessageBox.Show($"{valueIndex} {resultColumnFirst} {resultColumnSecond} три");
             }
             return Convert.ToString(Math.Round(result,0));
         }
