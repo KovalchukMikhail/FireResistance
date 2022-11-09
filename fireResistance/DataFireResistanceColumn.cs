@@ -111,7 +111,6 @@ namespace fireResistance
                 {
                     if (name.Key.EndsWith($"200_{fireResistanceVolume}"))
                     {
-                        MessageBox.Show($"{name.Key} один");
                         temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet200, Convert.ToString(lenthFromArmatureToEdge));
                     }
                 }
@@ -122,7 +121,6 @@ namespace fireResistance
                 {
                     if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
                     {
-                        MessageBox.Show($"{name.Key} один");
                         temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet300, Convert.ToString(lenthFromArmatureToEdge));
                     }
                 }
@@ -133,7 +131,6 @@ namespace fireResistance
                 {
                     if (name.Key.EndsWith($"400_{fireResistanceVolume}"))
                     {
-                        MessageBox.Show($"{name.Key} один");
                         temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet400, Convert.ToString(lenthFromArmatureToEdge));
                     }
                 }
@@ -144,8 +141,7 @@ namespace fireResistance
                 {
                     if (name.Key.EndsWith($"200_{fireResistanceVolume}"))
                     {
-                        temperatureFirst = ChooseTemperature(fireResistanceVolume, lenthFromArmatureToEdge, 200);
-                        MessageBox.Show($"результат для h200 {temperatureFirst}");
+                        temperatureFirst = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet200, Convert.ToString(lenthFromArmatureToEdge));
                     }
                 }
 
@@ -153,8 +149,7 @@ namespace fireResistance
                 {
                     if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
                     {
-                        temperatureSecond = ChooseTemperature(fireResistanceVolume, lenthFromArmatureToEdge, 300);
-                        MessageBox.Show($"результат для h300 {temperatureSecond}");
+                        temperatureSecond = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet300, Convert.ToString(lenthFromArmatureToEdge));
                     }
                 }
                 temperature = Convert.ToString(Math.Round(Convert.ToInt32(temperatureFirst) - (width - 200) / 100 * (Convert.ToInt32(temperatureFirst) - Convert.ToInt32(temperatureSecond)), 0));
@@ -166,8 +161,7 @@ namespace fireResistance
                 {
                     if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
                     {
-                        temperatureFirst = ChooseTemperature(fireResistanceVolume, lenthFromArmatureToEdge, 300);
-                        MessageBox.Show($"результат для h300 {temperatureFirst}");
+                        temperatureFirst = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet300, Convert.ToString(lenthFromArmatureToEdge));
                     }
                 }
 
@@ -175,8 +169,7 @@ namespace fireResistance
                 {
                     if (name.Key.EndsWith($"400_{fireResistanceVolume}"))
                     {
-                        temperatureSecond = ChooseTemperature(fireResistanceVolume, lenthFromArmatureToEdge, 400);
-                        MessageBox.Show($"результат для h400 {temperatureSecond}");
+                        temperatureSecond = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet400, Convert.ToString(lenthFromArmatureToEdge));
                     }
                 }
                 temperature = Convert.ToString(Math.Round(Convert.ToInt32(temperatureFirst) - (width - 300) / 100 * (Convert.ToInt32(temperatureFirst) - Convert.ToInt32(temperatureSecond)), 0));
@@ -191,7 +184,8 @@ namespace fireResistance
             concreteResistNormative = DataFromSP63.sheetConcreteResistNormative[concreteClass];
             temperatureArmature = ChooseTemperatureArmature(fireResistanceVolume, lenthFromArmatureToEdge, widthElement, heightElement);
             temperatureConcrete = "500";//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
-            gammaBT = Interpolation.interpolationColumn(DataFromeSP468.concreteTypeForSheet, DataFromeSP468.temperatureForSheet, concreteType, temperatureConcrete, DataFromeSP468.sheetGammaBT);
+            //gammaBT = Interpolation.interpolationColumn(DataFromeSP468.concreteTypeForSheet, DataFromeSP468.temperatureForSheet, concreteType, temperatureConcrete, DataFromeSP468.sheetGammaBT);
+            gammaBT = 1;
             betaB = Interpolation.interpolationColumn(DataFromeSP468.concreteTypeForSheet, DataFromeSP468.temperatureForSheet, concreteType, temperatureConcrete, DataFromeSP468.sheetBetaB);
             concreteResistWithTemperatureNormative = concreteResistNormative * gammaBT;
             gammaST = Interpolation.interpolationColumn(DataFromeSP468.armatureClassForSheet, DataFromeSP468.temperatureForSheet, armatureClass, temperatureArmature, DataFromeSP468.sheetGammaSt);
