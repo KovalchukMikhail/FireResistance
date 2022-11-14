@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AverageTemperature.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="DataArmatureInfo.cs" />
     <Compile Include="DataFireResistanceColumn.cs" />

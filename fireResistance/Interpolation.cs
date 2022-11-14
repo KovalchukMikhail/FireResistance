@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -70,31 +71,47 @@ namespace fireResistance
             return result;
         }
 
-        public static string interpolationTemperatureSheet(double[,] sheet, Dictionary<string, int> DictWithKeyIsText, string value)
+        public static string interpolationTemperatureSheet(double[,] sheet, Dictionary<string, int> DictWithKeyIsText, string valueRow, string valueColumn)
         {
 
-            double valueIndex = CheckValue(value, DictWithKeyIsText);
+            double valueIndexRow = CheckValue(valueRow, DictWithKeyIsText);
+            double valueIndexColumn = CheckValue(valueColumn, DictWithKeyIsText);
             double result = 0;
-            double resultColumnFirst;
-            double resultColumnSecond;
+            double resultRowFirst;
+            double resultRowSecond;
 
-            if (valueIndex == Math.Truncate(valueIndex))
+            if (valueIndexRow == Math.Truncate(valueIndexRow) && valueIndexColumn == Math.Truncate(valueIndexColumn))
             {
-                result = sheet[Convert.ToInt32(valueIndex), Convert.ToInt32(valueIndex)];
+                result = sheet[Convert.ToInt32(valueIndexRow), Convert.ToInt32(valueIndexColumn)];
+            }
+            else if (valueIndexRow == DictWithKeyIsText.Count - 1)
+            {
+                double valueFirst = sheet[Convert.ToInt32(Math.Truncate(valueIndexRow)), Convert.ToInt32(Math.Truncate(valueIndexColumn))];
+                double valueSecond = sheet[Convert.ToInt32(Math.Truncate(valueIndexRow)), Convert.ToInt32(Math.Truncate(valueIndexColumn)) + 1];
+
+                result = valueFirst - Math.Abs(valueFirst - valueSecond) * (valueIndexColumn - Math.Truncate(valueIndexColumn));
+
+            }
+            else if (valueIndexColumn == DictWithKeyIsText.Count - 1)
+            {
+                double valueFirst = sheet[Convert.ToInt32(Math.Truncate(valueIndexRow)), Convert.ToInt32(Math.Truncate(valueIndexColumn))];
+                double valueSecond = sheet[Convert.ToInt32(Math.Truncate(valueIndexRow)) + 1, Convert.ToInt32(Math.Truncate(valueIndexColumn))];
+
+                result = valueFirst - Math.Abs(valueFirst - valueSecond) * (valueIndexRow - Math.Truncate(valueIndexRow));
             }
             else
             {
-                double valueFirst = sheet[Convert.ToInt32(Math.Truncate(valueIndex)), Convert.ToInt32(Math.Truncate(valueIndex))];
-                double valueSecond = sheet[Convert.ToInt32(Math.Truncate(valueIndex)), Convert.ToInt32(Math.Truncate(valueIndex)) + 1];
+                double valueFirst = sheet[Convert.ToInt32(Math.Truncate(valueIndexRow)), Convert.ToInt32(Math.Truncate(valueIndexColumn))];
+                double valueSecond = sheet[Convert.ToInt32(Math.Truncate(valueIndexRow)), Convert.ToInt32(Math.Truncate(valueIndexColumn)) + 1];
                 
-                resultColumnFirst = valueFirst - Math.Abs(valueFirst - valueSecond) * (valueIndex - Math.Truncate(valueIndex));
+                resultRowFirst = valueFirst - Math.Abs(valueFirst - valueSecond) * (valueIndexColumn - Math.Truncate(valueIndexColumn));
 
-                valueFirst = sheet[Convert.ToInt32(Math.Truncate(valueIndex)) + 1, Convert.ToInt32(Math.Truncate(valueIndex))];
-                valueSecond = sheet[Convert.ToInt32(Math.Truncate(valueIndex)) + 1, Convert.ToInt32(Math.Truncate(valueIndex)) + 1];
+                valueFirst = sheet[Convert.ToInt32(Math.Truncate(valueIndexRow)) + 1, Convert.ToInt32(Math.Truncate(valueIndexColumn))];
+                valueSecond = sheet[Convert.ToInt32(Math.Truncate(valueIndexRow)) + 1, Convert.ToInt32(Math.Truncate(valueIndexColumn)) + 1];
 
-                resultColumnSecond = valueFirst - Math.Abs(valueFirst - valueSecond) * (valueIndex - Math.Truncate(valueIndex));
+                resultRowSecond = valueFirst - Math.Abs(valueFirst - valueSecond) * (valueIndexColumn - Math.Truncate(valueIndexColumn));
 
-                result = resultColumnFirst - (resultColumnFirst - resultColumnSecond) * (valueIndex - Math.Truncate(valueIndex));
+                result = resultRowFirst - (resultRowFirst - resultRowSecond) * (valueIndexRow - Math.Truncate(valueIndexRow));
                 
             }
             return Convert.ToString(Math.Round(result,0));

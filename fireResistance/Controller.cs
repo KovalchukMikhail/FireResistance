@@ -9,7 +9,7 @@ namespace fireResistance
 {
     public class Controller
     {
-        public void RunFireResistanceColumn(string comboBoxFireResistanceLimit, double lenthElement, double heightElement, double widthElement,
+        public void RunFireResistanceColumn(string comboBoxFireResistanceLimit, double lenthElement, int heightElement, int widthElement,
             double lenthFromArmatureToEdge, string fixationElement, string armatureClass,
             string concreteType, string concreteClass, int armatureDiameter, int armatureAmount,
             double moment, double strength)
