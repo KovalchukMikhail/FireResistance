@@ -312,5 +312,47 @@ namespace fireResistance
             {"400_R150",  h400R150}
         };
 
+        public static double[,] criticalTemperatureConcreteSilicate =
+        {
+            {15, 11, 8, 6, 6, 6, 6, 6, 6},
+            {22, 18, 15, 13, 13, 13, 13, 13, 13},
+            {29, 25, 22, 20, 20, 20, 20, 20, 20},
+            {48, 40, 35, 32, 29, 28, 28, 28, 28},
+            {62, 54, 46, 42, 39, 38, 38, 38, 38},
+            {70, 62, 55, 52, 48, 47, 46, 45, 44}
+        };
+
+        public static double[,] criticalTemperatureConcreteCarbonate =
+        {
+            {8, 5, 3, 3, 3, 3, 3, 3, 3},
+            {15, 12, 8, 7, 7, 7, 7, 7, 7},
+            {22, 18, 13, 11, 11, 11, 11, 11, 11},
+            {36, 30, 26, 23, 20, 20, 18, 18, 18},
+            {53, 45, 35, 32, 28, 27, 26, 26, 25},
+            {66, 53, 45, 40, 37, 35, 33, 32, 31}
+        };
+
+        public static Dictionary<string, int> temperatureForCriticalTemperature = new Dictionary<string, int>
+        {
+            {"200", 0},
+            {"300", 1},
+            {"400", 2},
+            {"500", 3},
+            {"600", 4},
+            {"700", 5},
+            {"800", 6},
+            {"900", 7},
+            {"1000", 8}
+        };
+
+        public static Dictionary<string, int> fireResistanceForCriticalTemperature = new Dictionary<string, int>
+        {
+            {"R30", 0},
+            {"R45", 1},
+            {"R60", 2},
+            {"R90", 3},
+            {"R120", 4},
+            {"R150", 5}
+        };
     }
 }

@@ -77,7 +77,6 @@
             // 
             this.comboBoxFireResistanceLimit.FormattingEnabled = true;
             this.comboBoxFireResistanceLimit.Items.AddRange(new object[] {
-            "R15",
             "R30",
             "R45",
             "R60",

@@ -261,7 +261,10 @@ namespace fireResistance
         {
             armatureSquare = DataArmatureInfo.sheetArmatureDiameter[armatureDiameter] * armatureAmount;
             concreteResistNormative = DataFromSP63.sheetConcreteResistNormative[concreteClass];
-            deepConcreteWarming = 52;//!!!!!!!!!!!!!!!!!!!!!!!!!!!! сделать автоматическим
+
+            if (concreteType == "ТЯЖЕЛЫЙ, НА СИЛИКАТНОМ ЗАПОЛНИТЕЛЕ") deepConcreteWarming = Interpolation.interpolationColumn(Temperature.fireResistanceForCriticalTemperature, Temperature.temperatureForCriticalTemperature, fireResistanceVolume, Convert.ToString(Math.Min(widthElement, heightElement)), Temperature.criticalTemperatureConcreteSilicate);
+            else deepConcreteWarming = Interpolation.interpolationColumn(Temperature.fireResistanceForCriticalTemperature, Temperature.temperatureForCriticalTemperature, fireResistanceVolume, Convert.ToString(Math.Min(widthElement, heightElement)), Temperature.criticalTemperatureConcreteCarbonate);
+            MessageBox.Show($"Глубина прогрева бетонаж: {deepConcreteWarming}");
             workHeight = heightElement - lenthFromArmatureToEdge;
             heightProfileWithWarming = heightElement - 2 * deepConcreteWarming;
             workWidthWithWarming = widthElement - 2 * deepConcreteWarming;
