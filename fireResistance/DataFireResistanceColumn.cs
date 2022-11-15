@@ -58,7 +58,7 @@ namespace fireResistance
         public double momentOfInertiaArmature; // Момент инерции арматуры относительно центра тяжести сечения элемента
         public double armatureElasticityModulusWithWarming; // Модуль деформации арматуры при нагреве
         public double concreteElasticityModulusWithWarming; // Модуль деформации бетона при нагреве
-        public double FlexuralStiffness; // Изгибная жесткость
+        public double flexuralStiffness; // Изгибная жесткость
         public double strengthCritical; // Критическая сила
         public double deflectionСoefficient; // Коэффициент учитывающий влияние прогиба
         public double finalEccentricity; // Расстояние от точки приложения силы до центра тяжести арматуры
@@ -72,6 +72,9 @@ namespace fireResistance
         public double demandLeftPart; // левая часть условия
         public double demandRightPart; // правая часть условия
         public double result;
+        public bool checkFirst = true;
+        public bool checkSecond = true;
+        public bool checkthird = true;
 
 
 
@@ -183,7 +186,7 @@ namespace fireResistance
         public string ChooseTemperatureConcrete(string fireResistanceVolume, int widthElement, int heightElement, int distanceFromBringToPointAverageTemperature, int criticalTemperature)
         {
             string temperature = string.Empty;
-            if (widthElement == 200 && heightElement > widthElement)
+            if (widthElement == 200 && heightElement >= widthElement)
             {
                 int lenthForCalculation = distanceFromBringToPointAverageTemperature;
                 int widthForCalculation = widthElement/2;
@@ -197,7 +200,7 @@ namespace fireResistance
                 }
 
             }
-            else if (widthElement == 300 && heightElement > widthElement)
+            else if (widthElement == 300 && heightElement >= widthElement)
             {
                 int lenthForCalculation = distanceFromBringToPointAverageTemperature;
                 int widthForCalculation = widthElement / 2;
@@ -210,7 +213,7 @@ namespace fireResistance
                     }
                 }
             }
-            else if (widthElement == 400 && heightElement > widthElement)
+            else if (widthElement == 400 && heightElement >= widthElement)
             {
                 int lenthForCalculation = distanceFromBringToPointAverageTemperature;
                 int widthForCalculation = widthElement / 2;
@@ -223,7 +226,7 @@ namespace fireResistance
                     }
                 }
             }
-            else if (widthElement > 400 && heightElement > widthElement)
+            else if (widthElement > 400 && heightElement >= widthElement)
             {
                 int lenthForCalculation = distanceFromBringToPointAverageTemperature;
                 int widthForCalculation = 400 / 2;
@@ -237,13 +240,13 @@ namespace fireResistance
                     }
                 }
             }
-            else if (widthElement > 200 && widthElement < 300 && heightElement > widthElement)
+            else if (widthElement > 200 && widthElement < 300 && heightElement >= widthElement)
             {
                 string temperatureFirst = ChooseTemperatureConcrete(fireResistanceVolume, 200, heightElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
                 string temperatureSecond = ChooseTemperatureConcrete(fireResistanceVolume, 300, heightElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
                 temperature = Convert.ToString(Math.Round(Convert.ToDouble(temperatureFirst) - (Convert.ToDouble(widthElement) - 200) / 100 * (Convert.ToDouble(temperatureFirst) - Convert.ToDouble(temperatureSecond)), 0));
             }
-            else if (widthElement > 300 && widthElement < 400 && heightElement > widthElement)
+            else if (widthElement > 300 && widthElement < 400 && heightElement >= widthElement)
             {
                 string temperatureFirst = ChooseTemperatureConcrete(fireResistanceVolume, 300, heightElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
                 string temperatureSecond = ChooseTemperatureConcrete(fireResistanceVolume, 400, heightElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
@@ -262,15 +265,14 @@ namespace fireResistance
             armatureSquare = DataArmatureInfo.sheetArmatureDiameter[armatureDiameter] * armatureAmount;
             concreteResistNormative = DataFromSP63.sheetConcreteResistNormative[concreteClass];
 
-            if (concreteType == "ТЯЖЕЛЫЙ, НА СИЛИКАТНОМ ЗАПОЛНИТЕЛЕ") deepConcreteWarming = Interpolation.interpolationColumn(Temperature.fireResistanceForCriticalTemperature, Temperature.temperatureForCriticalTemperature, fireResistanceVolume, Convert.ToString(Math.Min(widthElement, heightElement)), Temperature.criticalTemperatureConcreteSilicate);
-            else deepConcreteWarming = Interpolation.interpolationColumn(Temperature.fireResistanceForCriticalTemperature, Temperature.temperatureForCriticalTemperature, fireResistanceVolume, Convert.ToString(Math.Min(widthElement, heightElement)), Temperature.criticalTemperatureConcreteCarbonate);
-            MessageBox.Show($"Глубина прогрева бетонаж: {deepConcreteWarming}");
+            if (concreteType == "ТЯЖЕЛЫЙ, НА СИЛИКАТНОМ ЗАПОЛНИТЕЛЕ") deepConcreteWarming = Interpolation.interpolationColumn(Temperature.fireResistanceForCriticalTemperature, Temperature.temperatureForCriticalTemperature, fireResistanceVolume, Convert.ToString(Math.Min(Math.Min(widthElement, heightElement), 1000)), Temperature.criticalTemperatureConcreteSilicate);
+            else deepConcreteWarming = Interpolation.interpolationColumn(Temperature.fireResistanceForCriticalTemperature, Temperature.temperatureForCriticalTemperature, fireResistanceVolume, Convert.ToString(Math.Min(Math.Min(widthElement, heightElement), 1000)), Temperature.criticalTemperatureConcreteCarbonate);
             workHeight = heightElement - lenthFromArmatureToEdge;
             heightProfileWithWarming = heightElement - 2 * deepConcreteWarming;
             workWidthWithWarming = widthElement - 2 * deepConcreteWarming;
             squareChangedProfile = 0.9 * heightProfileWithWarming * workWidthWithWarming;
             workHeightProfileWithWarming = workHeight - deepConcreteWarming;
-            distanceFromBringToPointAverageTemperature = Convert.ToInt32(0.2 * workHeightProfileWithWarming);
+            distanceFromBringToPointAverageTemperature = Convert.ToInt32(0.2 * workHeightProfileWithWarming) + Convert.ToInt32(deepConcreteWarming);
             if (concreteType == "ТЯЖЕЛЫЙ, НА СИЛИКАТНОМ ЗАПОЛНИТЕЛЕ") criticalTemperatureConcrete = 500;
             temperatureArmature = ChooseTemperatureArmature(fireResistanceVolume, lenthFromArmatureToEdge, widthElement, heightElement);
             temperatureConcrete = ChooseTemperatureConcrete(fireResistanceVolume, widthElement, heightElement, distanceFromBringToPointAverageTemperature, criticalTemperatureConcrete);
@@ -302,8 +304,13 @@ namespace fireResistance
             momentOfInertiaArmature = armatureSquare * Math.Pow(heightElement - 2 * lenthFromArmatureToEdge, 2) / 2;
             armatureElasticityModulusWithWarming = armatureElasticityModulus * betaS;
             concreteElasticityModulusWithWarming = concreteStartElasticityModulus * betaB;
-            FlexuralStiffness = 0.15 * concreteElasticityModulusWithWarming * momentOfInertiaConcrete / (fiL * (0.3 + relativelyEccentricityStrength)) + 0.7 * armatureElasticityModulusWithWarming * momentOfInertiaArmature;
-            strengthCritical = Math.Pow(Math.PI, 2) * FlexuralStiffness / Math.Pow(workLenth, 2);
+            flexuralStiffness = 0.15 * concreteElasticityModulusWithWarming * momentOfInertiaConcrete / (fiL * (0.3 + relativelyEccentricityStrength)) + 0.7 * armatureElasticityModulusWithWarming * momentOfInertiaArmature;
+            strengthCritical = Math.Pow(Math.PI, 2) * flexuralStiffness / Math.Pow(workLenth, 2);
+            if (strength > strengthCritical)
+            {
+                checkFirst = false;
+                return;
+            }
             deflectionСoefficient = 1 / (1 - strength / strengthCritical);
             finalEccentricity = eccentricityStrength * deflectionСoefficient + 0.5 * (workHeightProfileWithWarming - lenthFromArmatureToEdge) + eccentricityTemperature;
             relativeDeformationArmature = armatureResistStretchWithTemperatureСalculation / armatureElasticityModulusWithWarming;
@@ -314,17 +321,20 @@ namespace fireResistance
             relativeHeightSqueezeZone = heightSqueezeZoneFirst / workHeightProfileWithWarming;
             
             if (relativeHeightSqueezeZone <= boundaryRelativeHeightSqueezeZone) heightSqueezeZone = heightSqueezeZoneFirst;
-            else heightSqueezeZone = heightSqueezeZoneSecond;
+            else
+            {
+                heightSqueezeZone = heightSqueezeZoneSecond;
+                checkSecond = false;
+            }
+                
 
             if (relativeHeightSqueezeZone < boundaryRelativeHeightSqueezeZone || heightSqueezeZone < workHeightProfileWithWarming)
             {
                 demandLeftPart = strength * finalEccentricity;
                 demandRightPart = concreteResistWithTemperatureNormative * workWidthWithWarming * heightSqueezeZone * (workHeightProfileWithWarming - 0.5 * heightSqueezeZone) + armatureResistSqueezeWithTemperatureСalculation * armatureSquare * (workHeight - lenthFromArmatureToEdge);
                 result = demandLeftPart / demandRightPart;
+                if (demandLeftPart > demandRightPart) checkthird = false;
 
-                MessageBox.Show($"{demandLeftPart}");
-                MessageBox.Show($"{demandRightPart}");
-                MessageBox.Show($"{result}");
             }
             else
             {
@@ -335,8 +345,8 @@ namespace fireResistance
                 betaB = Interpolation.interpolationColumn(DataFromeSP468.concreteTypeForSheet, DataFromeSP468.temperatureForSheet, concreteType, temperatureConcrete, DataFromeSP468.sheetBetaB);
                 concreteResistWithTemperatureNormative = concreteResistNormative * gammaBT;
                 concreteElasticityModulusWithWarming = concreteStartElasticityModulus * betaB;
-                FlexuralStiffness = 0.15 * concreteElasticityModulusWithWarming * momentOfInertiaConcrete / (fiL * (0.3 + relativelyEccentricityStrength)) + 0.7 * armatureElasticityModulusWithWarming * momentOfInertiaArmature;
-                strengthCritical = Math.Pow(Math.PI, 2) * FlexuralStiffness / Math.Pow(workLenth, 2);
+                flexuralStiffness = 0.15 * concreteElasticityModulusWithWarming * momentOfInertiaConcrete / (fiL * (0.3 + relativelyEccentricityStrength)) + 0.7 * armatureElasticityModulusWithWarming * momentOfInertiaArmature;
+                strengthCritical = Math.Pow(Math.PI, 2) * flexuralStiffness / Math.Pow(workLenth, 2);
                 deflectionСoefficient = 1 / (1 - strength / strengthCritical);
                 finalEccentricity = eccentricityStrength * deflectionСoefficient + 0.5 * (workHeightProfileWithWarming - lenthFromArmatureToEdge) + eccentricityTemperature;
                 heightSqueezeZoneFirst = (strength + armatureResistWithTemperatureNormative * armatureSquare - armatureResistSqueezeWithTemperatureСalculation * armatureSquare) / (concreteResistWithTemperatureNormative * workWidthWithWarming);
@@ -350,10 +360,8 @@ namespace fireResistance
                 demandLeftPart = strength * finalEccentricity;
                 demandRightPart = concreteResistWithTemperatureNormative * workWidthWithWarming * heightSqueezeZone * (workHeightProfileWithWarming - 0.5 * heightSqueezeZone) + armatureResistSqueezeWithTemperatureСalculation * armatureSquare * (workHeight - lenthFromArmatureToEdge);
                 result = demandLeftPart / demandRightPart;
+                if (demandLeftPart > demandRightPart) checkthird = false;
 
-                MessageBox.Show($"{demandLeftPart}");
-                MessageBox.Show($"{demandRightPart}");
-                MessageBox.Show($"{result}");
 
 
             }

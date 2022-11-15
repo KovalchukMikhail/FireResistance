@@ -22,9 +22,9 @@ namespace fireResistance
             //string text = $"{comboBoxFireResistanceLimit} {lenthElement} {heightElement} {widthElement} {lenthFromArmatureToEdge} {fixationElement} {armatureClass} {concreteType} " +
             //                $"{concreteClass} {armatureDiameter} {armatureAmount} {moment} {strength}";
 
-            string text = Convert.ToString(data.temperatureArmature);
 
-            MessageBox.Show(text);
+            CreateDoc doc = new CreateDoc();
+            doc.Create(data);
         }
 
     }
