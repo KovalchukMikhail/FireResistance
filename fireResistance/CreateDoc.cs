@@ -13,18 +13,17 @@ namespace fireResistance
         public void Create(DataFireResistanceColumn data)
         {
             Word.Application wordApp = new Word.Application();
-            wordApp.Visible = true;
+            
             Word.Document wordDocument;
             wordDocument = wordApp.Documents.Add();
             Word.Paragraphs wordParagraphs;
             Word.Paragraph wordParagraph;
             wordParagraphs = wordDocument.Paragraphs;
             wordParagraph = (Word.Paragraph)wordParagraphs[1];
-            wordParagraph.Range.Text = $"Проверка предела огнестойкости пилона {data.heightElement}x{data.widthElement}";
+            wordParagraph.Range.Text = $"\tПроверка предела огнестойкости пилона {data.heightElement}x{data.widthElement}";
             wordParagraph.Range.Font.Size = 10;
             wordParagraph.Range.Font.Name = "Times New Roman";
             wordParagraph.Range.Paragraphs.LineSpacing = 10;
-
 
             object oMissing = System.Reflection.Missing.Value;
             for (int i = 0; i < 3; i++)
@@ -44,7 +43,7 @@ namespace fireResistance
                 $"Ширина сечения:\n" +
                 $"\tb = {data.widthElement} мм\n" +
                 $"Закрепление по концам элемента:\n" +
-                $"{data.fixationElement}\n" +
+                $" {data.fixationElement}\n" +
                 $"Коэффициент расчетной длинны = {DataFromeSP468.FixationElementSheet[data.fixationElement]}\n" +
                 $"Класс бетона по прочности {data.concreteClass}\n" +
                 $"Класс арматуры по прочности:\n" +
@@ -61,15 +60,15 @@ namespace fireResistance
                 $"\t{data.temperatureArmature} °С\n" +
                 $"Температура прогрева бетона определенная в соответствии с п. 5.4 по приложению Б СП468.1325800.2019\n" +
                 $"\t{data.temperatureConcrete} °С\n" +
-                $"Игибающий момент от постоянной и длительной нормативной нагрузки:\n" +
+                $"Изгибающий момент от постоянной и длительной нормативной нагрузки:\n" +
                 $"\tMn = {Math.Round(data.moment, 2)} Н * мм = {Math.Round(data.moment * 0.00000010197162123),1} т * м\n" +
                 $"Нормальная сила от постоянной и длительной нормативной нагрузки:\n" +
                 $"\tNn = {Math.Round(data.strength, 2)} Н = {Math.Round(data.strength * 0.00010197162123, 1)} т\n" +
                 $"Нормативное сопротивление бетона сжатию. Табл. 6.7, СП63.13330.2018:\n" +
                 $"\tRbn = {data.concreteResistNormative} МПа\n" +
-                $"Коэфициент условий работы бетона в соответствии с п. 8.7 СП468.1325800.2019:\n" +
+                $"Коэффициент условий работы бетона в соответствии с п. 8.7 СП468.1325800.2019:\n" +
                 $"\tγbt = {data.gammaBT}\n" +
-                $"Коэфициент βb Табл. 5.1, СП468.1325800.2019:\n" +
+                $"Коэффициент βb Табл. 5.1, СП468.1325800.2019:\n" +
                 $"\tβb = {data.betaB}\n" +
                 $"Нормативное сопротивление бетона осевому сжатию с учетом изменения температуры ф.(5.1) СП468.1325800.2019\n" +
                 $"\tRbnt = Rbn*γbt = {data.concreteResistWithTemperatureNormative} МПа\n" +
@@ -77,9 +76,9 @@ namespace fireResistance
                 $"\tRsn = {data.armatureResistNormative} МПа\n" +
                 $"Нормативное сопротивление арматуры растяжению при высокой температуре. Ф.(5.5) СП468.1325800.2019\n" +
                 $"\tRsnt = Rsn*γst = {data.armatureResistWithTemperatureNormative} МПа\n" +
-                $"Коэфициент условий работы арматуры. Табл. 5.6, СП468.1325800.2019\n" +
+                $"Коэффициент условий работы арматуры. Табл. 5.6, СП468.1325800.2019\n" +
                 $"\tγst = {data.gammaST}\n" +
-                $"Коэфициент βs. Табл. 5.6, СП468.1325800.2019\n" +
+                $"Коэффициент βs. Табл. 5.6, СП468.1325800.2019\n" +
                 $"\tβs = {data.betaS}\n" +
                 $"Расчетное сопротивление арматуры сжатию. Табл. 6.14, СП63.13330.2018\n" +
                 $"\tRsc = {data.armatureResistSqueezeСalculation} МПа\n" +
@@ -105,9 +104,9 @@ namespace fireResistance
                 $"\tAred = 0,9*(b-2*at)*(h-2*at) = {data.squareChangedProfile} мм^2\n" +
                 $"Расчетная рабочая высота сечения при нагреве\n" +
                 $"\th0t = h0-at = {data.armatureAmount} мм\n" +
-                $"Случайный эксентриситет\n" +
+                $"Случайный эксцентриситет\n" +
                 $"\tеа = max(L/600;h/30;10) = {data.randomEccentricity} мм\n" +
-                $"Эксентриситет продольной силы относительно центра тяжести приведенного сечения с учетом п. 8.1.7 СП63.13330.2018\n" +
+                $"Эксцентриситет продольной силы относительно центра тяжести приведенного сечения с учетом п. 8.1.7 СП63.13330.2018\n" +
                 $"\te0 = M/N = {data.eccentricityStrength} мм\n" +
                 $"Относительное значение эксцентриситета продольной силы. п. 8.1.15 СП63.13330.2018\n" +
                 $"\tδe = {data.relativelyEccentricityStrength}\n" +
@@ -132,18 +131,19 @@ namespace fireResistance
             {
                 wordParagraph = (Word.Paragraph)wordParagraphs[93];
                 wordParagraph.Range.Text = $"Условие N ≤ Ncr\n" +
-                    $"\t{data.strength} > {data.strengthCritical}\n" +
-                    $"\t Не выполнено!";
+                    $"\t{Math.Round(data.strength, 2)} > {Math.Round(data.strengthCritical, 2)}\n" +
+                    $"\t Условие НЕ выполнено!";
+                wordApp.Visible = true;
                 return;
             }
 
             wordParagraph = (Word.Paragraph)wordParagraphs[93];
             wordParagraph.Range.Text = $"Условие N ≤ Ncr\n" +
-                $"\t{data.strength} ≤ {data.strengthCritical}\n" +
-                $"\t Выполнено!\n" +
-                $"Коэфициент учитывающий влияние прогиба п. 8.1.15 СП63.13330.2018\n" +
+                $"\t{Math.Round(data.strength, 2)} ≤ {Math.Round(data.strengthCritical, 2)}\n" +
+                $"\t Условие выполнено!\n" +
+                $"Коэффициент учитывающий влияние прогиба п. 8.1.15 СП63.13330.2018\n" +
                 $"\tη = 1/(1-N/Ncr) = {data.deflectionСoefficient}\n" +
-                $"Растояние от точки приложения силы N до центра тяжести сечения арматуры\n" +
+                $"Расстояние от точки приложения силы N до центра тяжести сечения арматуры\n" +
                 $"\te = e0*η + 0,5 * (h0t - a') + et = {data.finalEccentricity} мм\n" +
                 $"Относительная деформация растянутой арматуры\n" +
                 $"\tεs,el = Rst/Est = {data.relativeDeformationArmature}\n" +
@@ -181,17 +181,49 @@ namespace fireResistance
                 wordParagraph.Range.Text = $"\n\n" +
                     $"Проверка условия обеспечения предела огнестойкости (формула 8.25 СП468.1325800.2019)\n" +
                     $"\tN*e ≤ Rbnt*bt*xt*(h0t-0,5*xt)+Rsct*A's*(h0-a')\n" +
-                    $" \t{Math.Round(data.demandLeftPart, 1)} ≤ {Math.Round(data.demandRightPart, 1)}\n" +
-                    $"\t Условие выполнено!\n";
+                    $"\t{Math.Round(data.demandLeftPart, 1)} ≤ {Math.Round(data.demandRightPart, 1)}\n" +
+                    $"\t Условие выполнено!\n" +
+                    $"Коэффициент использования\n" +
+                    $"\t{data.result}";
             }
             else
             {
                 wordParagraph.Range.Text = $"Проверка условия обеспечения предела огнестойкости (формула 8.25 СП468.1325800.2019)\n" +
                     $"\tN*e ≤ Rbnt*bt*xt*(h0t-0,5*xt)+Rsct*A's*(h0-a')\n" +
-                    $" \t{Math.Round(data.demandLeftPart,1)} > {Math.Round(data.demandRightPart, 1)}\n" +
-                    $"\t Условие НЕ выполнено!\n";
+                    $"\t{Math.Round(data.demandLeftPart,1)} > {Math.Round(data.demandRightPart, 1)}\n" +
+                    $"\t Условие НЕ выполнено!\n" +
+                    $"Коэффициент использования\n" +
+                    $"\t{data.result}";
             }
 
+            Word.Range wordRangeFirst = null;
+            Word.Range wordRangeSecond = null;
+            Word.Range wordRangeThird = null;
+            for (int i = 1; i < wordDocument.Paragraphs.Count; i++)
+            {
+                string text = wordDocument.Paragraphs[i].Range.Text;
+                if (!text.StartsWith("\t") || text.StartsWith(" "))
+                {
+                    wordRangeSecond = wordDocument.Paragraphs[i].Range;
+                    wordRangeSecond.Select();
+                    wordRangeSecond.Font.Underline = Word.WdUnderline.wdUnderlineSingle;
+                }
+                if (text.StartsWith("\t Условие выполнено!") || text.StartsWith("\t Условие НЕ выполнено!"))
+                {
+                    wordRangeThird = wordDocument.Paragraphs[i].Range;
+                    wordRangeThird.Select();
+                    wordRangeThird.Font.Bold = 1;
+                }
+                if (text.StartsWith("\tПроверка предела огнестойкости пилона"))
+                {
+                    wordRangeFirst = wordDocument.Paragraphs[i].Range;
+                    wordRangeFirst.Select();
+                    wordRangeFirst.Font.Bold = 1;
+                    wordRangeFirst.Font.Size = 14;
+                }
+
+            }
+            wordApp.Visible = true;
 
 
 
