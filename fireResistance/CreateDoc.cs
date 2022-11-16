@@ -61,9 +61,9 @@ namespace fireResistance
                 $"Температура прогрева бетона определенная в соответствии с п. 5.4 по приложению Б СП468.1325800.2019\n" +
                 $"\t{data.temperatureConcrete} °С\n" +
                 $"Изгибающий момент от постоянной и длительной нормативной нагрузки:\n" +
-                $"\tMn = {Math.Round(data.moment, 2)} Н * мм = {Math.Round(data.moment * 0.00000010197162123),1} т * м\n" +
+                $"\tMn = {Math.Round(data.moment, 2)} Н * мм = {data.moment * 0.00000010197162123} т * м\n" +
                 $"Нормальная сила от постоянной и длительной нормативной нагрузки:\n" +
-                $"\tNn = {Math.Round(data.strength, 2)} Н = {Math.Round(data.strength * 0.00010197162123, 1)} т\n" +
+                $"\tNn = {Math.Round(data.strength, 2)} Н = {data.strength * 0.00010197162123} т\n" +
                 $"Нормативное сопротивление бетона сжатию. Табл. 6.7, СП63.13330.2018:\n" +
                 $"\tRbn = {data.concreteResistNormative} МПа\n" +
                 $"Коэффициент условий работы бетона в соответствии с п. 8.7 СП468.1325800.2019:\n" +
@@ -103,7 +103,7 @@ namespace fireResistance
                 $"Площадь приведенного поперечного сечения. Ф.(8.8) СП468.1325800.2019\n" +
                 $"\tAred = 0,9*(b-2*at)*(h-2*at) = {data.squareChangedProfile} мм^2\n" +
                 $"Расчетная рабочая высота сечения при нагреве\n" +
-                $"\th0t = h0-at = {data.armatureAmount} мм\n" +
+                $"\th0t = h0-at = {data.workHeightProfileWithWarming} мм\n" +
                 $"Случайный эксцентриситет\n" +
                 $"\tеа = max(L/600;h/30;10) = {data.randomEccentricity} мм\n" +
                 $"Эксцентриситет продольной силы относительно центра тяжести приведенного сечения с учетом п. 8.1.7 СП63.13330.2018\n" +
@@ -184,7 +184,7 @@ namespace fireResistance
                     $"\t{Math.Round(data.demandLeftPart, 1)} ≤ {Math.Round(data.demandRightPart, 1)}\n" +
                     $"\t Условие выполнено!\n" +
                     $"Коэффициент использования\n" +
-                    $"\t{data.result}";
+                    $"\t{Math.Round(data.result, 3)}";
             }
             else
             {
@@ -193,7 +193,7 @@ namespace fireResistance
                     $"\t{Math.Round(data.demandLeftPart,1)} > {Math.Round(data.demandRightPart, 1)}\n" +
                     $"\t Условие НЕ выполнено!\n" +
                     $"Коэффициент использования\n" +
-                    $"\t{data.result}";
+                    $"\t{Math.Round(data.result, 3)}";
             }
 
             Word.Range wordRangeFirst = null;
@@ -208,7 +208,7 @@ namespace fireResistance
                     wordRangeSecond.Select();
                     wordRangeSecond.Font.Underline = Word.WdUnderline.wdUnderlineSingle;
                 }
-                if (text.StartsWith("\t Условие выполнено!") || text.StartsWith("\t Условие НЕ выполнено!"))
+                if (text.StartsWith("\t Условие выполнено!") || text.StartsWith("\t Условие НЕ выполнено!") || text.StartsWith($"\t{Math.Round(data.result, 3)}"))
                 {
                     wordRangeThird = wordDocument.Paragraphs[i].Range;
                     wordRangeThird.Select();
@@ -221,6 +221,7 @@ namespace fireResistance
                     wordRangeFirst.Font.Bold = 1;
                     wordRangeFirst.Font.Size = 14;
                 }
+
 
             }
             wordApp.Visible = true;

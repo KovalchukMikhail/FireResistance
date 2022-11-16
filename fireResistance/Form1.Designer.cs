@@ -1,4 +1,6 @@
-﻿namespace fireResistance
+﻿using Microsoft.Office.Interop.Word;
+
+namespace fireResistance
 {
     partial class LableFireResistanceForm
     {
@@ -68,7 +70,6 @@
             this.labelStrength = new System.Windows.Forms.Label();
             this.labelConcreteType = new System.Windows.Forms.Label();
             this.comboBoxConcreteType = new System.Windows.Forms.ComboBox();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonСalculation = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -76,6 +77,7 @@
             // comboBoxFireResistanceLimit
             // 
             this.comboBoxFireResistanceLimit.FormattingEnabled = true;
+            this.comboBoxFireResistanceLimit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.comboBoxFireResistanceLimit.Items.AddRange(new object[] {
             "R30",
             "R45",
@@ -89,7 +91,8 @@
             this.comboBoxFireResistanceLimit.Size = new System.Drawing.Size(80, 24);
             this.comboBoxFireResistanceLimit.TabIndex = 0;
             this.comboBoxFireResistanceLimit.Text = "R120";
-            this.comboBoxFireResistanceLimit.SelectedIndexChanged += new System.EventHandler(this.comboBoxFireResistanceLimit_SelectedIndexChanged);
+            this.comboBoxFireResistanceLimit.Click += new System.EventHandler(this.comboBoxFireResistanceLimit_Click);
+            this.comboBoxFireResistanceLimit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxFireResistanceLimit_KeyPress);
             // 
             // LablefireResistanceLimit
             // 
@@ -118,7 +121,7 @@
             this.textBoxLenthElement.Name = "textBoxLenthElement";
             this.textBoxLenthElement.Size = new System.Drawing.Size(100, 22);
             this.textBoxLenthElement.TabIndex = 3;
-            this.textBoxLenthElement.TextChanged += new System.EventHandler(this.textBoxLenthElement_TextChanged);
+            this.textBoxLenthElement.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxLenthElement_KeyPress);
             // 
             // labelLenthInmm
             // 
@@ -149,7 +152,7 @@
             this.textBoxHeightElement.Name = "textBoxHeightElement";
             this.textBoxHeightElement.Size = new System.Drawing.Size(100, 22);
             this.textBoxHeightElement.TabIndex = 6;
-            this.textBoxHeightElement.TextChanged += new System.EventHandler(this.textBoxHeightElement_TextChanged);
+            this.textBoxHeightElement.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxHeightElement_KeyPress);
             // 
             // labelHeightElement
             // 
@@ -179,7 +182,7 @@
             this.textBoxWidthElement.Name = "textBoxWidthElement";
             this.textBoxWidthElement.Size = new System.Drawing.Size(100, 22);
             this.textBoxWidthElement.TabIndex = 9;
-            this.textBoxWidthElement.TextChanged += new System.EventHandler(this.textBoxWidthElement_TextChanged);
+            this.textBoxWidthElement.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxWidthElement_KeyPress);
             // 
             // labelWidthElement
             // 
@@ -214,7 +217,8 @@
             this.comboBoxFixationElement.Size = new System.Drawing.Size(636, 24);
             this.comboBoxFixationElement.TabIndex = 11;
             this.comboBoxFixationElement.Text = "НЕ СМЕЩАЕМАЯ ЗАДЕЛКА НА ДВУХ КОНЦАХ С ПОДАТЛИВЫМ ОГРАНИЧЕННЫМ ПОВОРОТОМ";
-            this.comboBoxFixationElement.SelectedIndexChanged += new System.EventHandler(this.comboBoxFixationElement_SelectedIndexChanged);
+            this.comboBoxFixationElement.Click += new System.EventHandler(this.comboBoxFixationElement_Click);
+            this.comboBoxFixationElement.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxFixationElement_KeyPress);
             // 
             // pictureBox1
             // 
@@ -244,7 +248,7 @@
             this.textBoxLenthFromArmatureToEdge.Name = "textBoxLenthFromArmatureToEdge";
             this.textBoxLenthFromArmatureToEdge.Size = new System.Drawing.Size(100, 22);
             this.textBoxLenthFromArmatureToEdge.TabIndex = 15;
-            this.textBoxLenthFromArmatureToEdge.TextChanged += new System.EventHandler(this.textBoxLenthFromArmatureToEdge_TextChanged_1);
+            this.textBoxLenthFromArmatureToEdge.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxLenthFromArmatureToEdge_KeyPress);
             // 
             // label2
             // 
@@ -326,7 +330,8 @@
             this.comboBoxArmatureClass.Size = new System.Drawing.Size(636, 24);
             this.comboBoxArmatureClass.TabIndex = 21;
             this.comboBoxArmatureClass.Text = "А500С МАРКИ Ст3Гпс ТЕРМОМЕХАНИЧЕСКИ УПРОЧНЕННАЯ ПО ГОСТ 34028-2016";
-            this.comboBoxArmatureClass.SelectedIndexChanged += new System.EventHandler(this.comboBoxArmatureClass_SelectedIndexChanged);
+            this.comboBoxArmatureClass.Click += new System.EventHandler(this.comboBoxArmatureClass_Click);
+            this.comboBoxArmatureClass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxArmatureClass_KeyPress);
             // 
             // labelConcreteClass
             // 
@@ -357,7 +362,8 @@
             this.comboBoxConcreteClass.Size = new System.Drawing.Size(80, 24);
             this.comboBoxConcreteClass.TabIndex = 23;
             this.comboBoxConcreteClass.Text = "B30";
-            this.comboBoxConcreteClass.SelectedIndexChanged += new System.EventHandler(this.comboBoxConcreteClass_SelectedIndexChanged_1);
+            this.comboBoxConcreteClass.Click += new System.EventHandler(this.comboBoxConcreteClass_Click);
+            this.comboBoxConcreteClass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxConcreteClass_KeyPress);
             // 
             // labelArmatureDiameter
             // 
@@ -392,7 +398,8 @@
             this.comboBoxArmatureDiameter.Size = new System.Drawing.Size(80, 24);
             this.comboBoxArmatureDiameter.TabIndex = 25;
             this.comboBoxArmatureDiameter.Text = "10";
-            this.comboBoxArmatureDiameter.SelectedIndexChanged += new System.EventHandler(this.comboBoxArmatureDiameter_SelectedIndexChanged);
+            this.comboBoxArmatureDiameter.Click += new System.EventHandler(this.comboBoxArmatureDiameter_Click);
+            this.comboBoxArmatureDiameter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxArmatureDiameter_KeyPress);
             // 
             // labelArmatureAmount
             // 
@@ -400,9 +407,9 @@
             this.labelArmatureAmount.Location = new System.Drawing.Point(18, 478);
             this.labelArmatureAmount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelArmatureAmount.Name = "labelArmatureAmount";
-            this.labelArmatureAmount.Size = new System.Drawing.Size(300, 16);
+            this.labelArmatureAmount.Size = new System.Drawing.Size(475, 16);
             this.labelArmatureAmount.TabIndex = 28;
-            this.labelArmatureAmount.Text = "Выберите количество арматурных стержней";
+            this.labelArmatureAmount.Text = "Выберите количество арматурных стержней (для определения As = A\'s)";
             // 
             // comboBoxArmatureAmount
             // 
@@ -434,12 +441,13 @@
             this.comboBoxArmatureAmount.Size = new System.Drawing.Size(80, 24);
             this.comboBoxArmatureAmount.TabIndex = 27;
             this.comboBoxArmatureAmount.Text = "2";
-            this.comboBoxArmatureAmount.SelectedIndexChanged += new System.EventHandler(this.comboBoxArmatureAmount_SelectedIndexChanged);
+            this.comboBoxArmatureAmount.Click += new System.EventHandler(this.comboBoxArmatureAmount_Click);
+            this.comboBoxArmatureAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxArmatureAmount_KeyPress);
             // 
             // labelMomentSign
             // 
             this.labelMomentSign.AutoSize = true;
-            this.labelMomentSign.Location = new System.Drawing.Point(31, 550);
+            this.labelMomentSign.Location = new System.Drawing.Point(31, 548);
             this.labelMomentSign.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMomentSign.Name = "labelMomentSign";
             this.labelMomentSign.Size = new System.Drawing.Size(28, 16);
@@ -449,7 +457,7 @@
             // labelMomentTxM
             // 
             this.labelMomentTxM.AutoSize = true;
-            this.labelMomentTxM.Location = new System.Drawing.Point(175, 552);
+            this.labelMomentTxM.Location = new System.Drawing.Point(175, 548);
             this.labelMomentTxM.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMomentTxM.Name = "labelMomentTxM";
             this.labelMomentTxM.Size = new System.Drawing.Size(28, 16);
@@ -463,7 +471,7 @@
             this.textBoxMoment.Name = "textBoxMoment";
             this.textBoxMoment.Size = new System.Drawing.Size(100, 22);
             this.textBoxMoment.TabIndex = 30;
-            this.textBoxMoment.TextChanged += new System.EventHandler(this.textBoxMoment_TextChanged);
+            this.textBoxMoment.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxMoment_KeyPress);
             // 
             // labelMoment
             // 
@@ -479,7 +487,7 @@
             // labellabelStrengthSign
             // 
             this.labellabelStrengthSign.AutoSize = true;
-            this.labellabelStrengthSign.Location = new System.Drawing.Point(31, 596);
+            this.labellabelStrengthSign.Location = new System.Drawing.Point(31, 594);
             this.labellabelStrengthSign.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labellabelStrengthSign.Name = "labellabelStrengthSign";
             this.labellabelStrengthSign.Size = new System.Drawing.Size(27, 16);
@@ -490,7 +498,7 @@
             // labelStrengthT
             // 
             this.labelStrengthT.AutoSize = true;
-            this.labelStrengthT.Location = new System.Drawing.Point(176, 599);
+            this.labelStrengthT.Location = new System.Drawing.Point(176, 595);
             this.labelStrengthT.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelStrengthT.Name = "labelStrengthT";
             this.labelStrengthT.Size = new System.Drawing.Size(14, 16);
@@ -505,7 +513,7 @@
             this.textBoxStrength.Name = "textBoxStrength";
             this.textBoxStrength.Size = new System.Drawing.Size(100, 22);
             this.textBoxStrength.TabIndex = 34;
-            this.textBoxStrength.TextChanged += new System.EventHandler(this.textBoxStrength_TextChanged);
+            this.textBoxStrength.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStrength_KeyPress);
             // 
             // labelStrength
             // 
@@ -541,30 +549,18 @@
             this.comboBoxConcreteType.Size = new System.Drawing.Size(636, 24);
             this.comboBoxConcreteType.TabIndex = 37;
             this.comboBoxConcreteType.Text = "ТЯЖЕЛЫЙ, НА СИЛИКАТНОМ ЗАПОЛНИТЕЛЕ";
-            this.comboBoxConcreteType.SelectedIndexChanged += new System.EventHandler(this.comboBoxConcreteType_SelectedIndexChanged);
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonCancel.Location = new System.Drawing.Point(546, 614);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(120, 30);
-            this.buttonCancel.TabIndex = 39;
-            this.buttonCancel.Text = "Выход";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.comboBoxConcreteType.Click += new System.EventHandler(this.comboBoxConcreteType_Click);
+            this.comboBoxConcreteType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxConcreteType_KeyPress);
             // 
             // buttonСalculation
             // 
             this.buttonСalculation.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonСalculation.Location = new System.Drawing.Point(340, 614);
+            this.buttonСalculation.Location = new System.Drawing.Point(11, 622);
             this.buttonСalculation.Margin = new System.Windows.Forms.Padding(2);
             this.buttonСalculation.Name = "buttonСalculation";
-            this.buttonСalculation.Size = new System.Drawing.Size(200, 30);
+            this.buttonСalculation.Size = new System.Drawing.Size(660, 33);
             this.buttonСalculation.TabIndex = 40;
-            this.buttonСalculation.Text = "Расчет";
+            this.buttonСalculation.Text = "Выполнить расчет и создать отчет";
             this.buttonСalculation.UseVisualStyleBackColor = true;
             this.buttonСalculation.Click += new System.EventHandler(this.buttonСalculation_Click);
             // 
@@ -574,10 +570,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(680, 658);
+            this.ClientSize = new System.Drawing.Size(680, 663);
             this.Controls.Add(this.buttonСalculation);
-            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.labelConcreteType);
             this.Controls.Add(this.comboBoxConcreteType);
             this.Controls.Add(this.labellabelStrengthSign);
@@ -674,7 +668,6 @@
         private System.Windows.Forms.Label labelStrength;
         private System.Windows.Forms.Label labelConcreteType;
         private System.Windows.Forms.ComboBox comboBoxConcreteType;
-        private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonСalculation;
     }
 }
