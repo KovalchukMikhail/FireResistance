@@ -4,3 +4,4 @@ obj
 *.config
 Properties
 *.csproj
+*.sln
