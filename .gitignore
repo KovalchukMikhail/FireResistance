@@ -5,3 +5,5 @@ obj
 Properties
 *.csproj
 *.sln
+.vs
+*.png

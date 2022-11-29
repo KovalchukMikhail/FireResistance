@@ -90,19 +90,39 @@ namespace fireResistance
 
         private void buttonСalculation_Click(object sender, EventArgs e)
         {
-            buttonСalculation.Enabled = false;
-            Controller run = new Controller();
-            run.RunFireResistanceColumn(comboBoxFireResistanceLimit.Text, Convert.ToDouble(textBoxLenthElement.Text), Convert.ToInt32(textBoxHeightElement.Text), Convert.ToInt32(textBoxWidthElement.Text),
-                Convert.ToDouble(textBoxLenthFromArmatureToEdge.Text), comboBoxFixationElement.Text, comboBoxArmatureClass.Text, comboBoxConcreteType.Text,
-                comboBoxConcreteClass.Text, Convert.ToInt32(comboBoxArmatureDiameter.Text), Convert.ToInt32(comboBoxArmatureAmount.Text), Convert.ToDouble(textBoxMoment.Text), Convert.ToDouble(textBoxStrength.Text));
-            buttonСalculation.Enabled = true;
+            if (textBoxLenthElement.Text != "" &&
+                textBoxHeightElement.Text != "" &&
+                textBoxWidthElement.Text != "" &&
+                textBoxLenthFromArmatureToEdge.Text != "" &&
+                textBoxMoment.Text != "" &&
+                textBoxStrength.Text != "" &&
+                !(textBoxStrength.Text.StartsWith(",")) &&
+                !(textBoxMoment.Text.StartsWith(",")))
+            {
+                buttonСalculation.Enabled = false;
+                Controller run = new Controller();
+                run.RunFireResistanceColumn(comboBoxFireResistanceLimit.Text, Convert.ToDouble(textBoxLenthElement.Text), Convert.ToInt32(textBoxHeightElement.Text), Convert.ToInt32(textBoxWidthElement.Text),
+                    Convert.ToDouble(textBoxLenthFromArmatureToEdge.Text), comboBoxFixationElement.Text, comboBoxArmatureClass.Text, comboBoxConcreteType.Text,
+                    comboBoxConcreteClass.Text, Convert.ToInt32(comboBoxArmatureDiameter.Text), Convert.ToInt32(comboBoxArmatureAmount.Text), Convert.ToDouble(textBoxMoment.Text), Convert.ToDouble(textBoxStrength.Text));
+                buttonСalculation.Enabled = true;
+            }
+            else
+            {
+                string tooltip = "";
+                if (textBoxLenthElement.Text == "") tooltip += "Укажите длину элемента (L)\n";
+                if (textBoxHeightElement.Text == "") tooltip += "Укажите высоту сечения элемента (h)\n";
+                if (textBoxWidthElement.Text == "") tooltip += "Укажите ширину сечения элемента (b)\n";
+                if (textBoxLenthFromArmatureToEdge.Text == "") tooltip += "Укажите расстояние от края элемента до центра тяжести арматуры (a)\n";
+                if (textBoxMoment.Text == "") tooltip += "Укажите изгибающий момент действующий на элемент (М)\n";
+                if (textBoxStrength.Text == "") tooltip += "Укажите продольную силу действующую на элемент (N)\n";
+                if (textBoxStrength.Text.StartsWith(",")) tooltip += "Значение момента (М) не может начинаться с ','\n";
+                if (textBoxMoment.Text.StartsWith(",")) tooltip += "Значение продольной силы (N) не может начинаться с ','\n";
+
+                MessageBox.Show(tooltip);
+            }
+
         }
 
-        //private void textBoxLenthElement_TextChanged(object sender, EventArgs e)
-        //{
-        //    char number = e.KeyChar;
-        //    MessageBox.Show(text.);
-        //}
 
         private void textBoxWidthElement_TextChanged(object sender, EventArgs e)
         {
