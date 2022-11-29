@@ -5,11 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace fireResistance
 {
+
+    /// <summary>
+    /// Contains the method for determines the average temperature of concrete
+    /// </summary>
     public class AverageTemperature
     {
-       public static string AverageTemperatureConcrete(double[,] sheet, Dictionary<string, int> dictWithKeyIsText, int lenthForCalculation, int criticalTemperature, int widthForCalculation, int additionalWidth = 0)
+
+        /// <summary>
+        /// Determines the average temperature of concrete at a distance lenthForCalculation.
+        /// </summary>
+        /// <remarks>
+        /// If the width is greater than provided in the tables,
+        /// the temperature of the points located deeper is taken at the point closest to them
+        /// </remarks>
+        /// <returns>string - Average temperature of concrete in degrees Celsius</returns>
+        public static string AverageTemperatureConcrete(double[,] sheet, Dictionary<string, int> dictWithKeyIsText, int lenthForCalculation, int criticalTemperature, int widthForCalculation, int additionalWidth = 0)
         {
             string result;
             double valueRow = Interpolation.CheckValue(Convert.ToString(lenthForCalculation), dictWithKeyIsText);

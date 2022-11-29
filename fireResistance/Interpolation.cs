@@ -9,8 +9,14 @@ using System.Xml.Linq;
 
 namespace fireResistance
 {
+    /// <summary>
+    /// The class contains mathods for interpolation values in sheets 
+    /// </summary>
     public class Interpolation
     {
+        /// <remarks>Defines the index of a column or row depending on the received column or row name.
+        /// The values after the comma indicate the position between columns or rows</remarks>
+        /// <returns>double - Index</returns>
         public static double CheckValue(string value, Dictionary<string, int> dict)
         {
             double indexValue = -1;
@@ -44,6 +50,9 @@ namespace fireResistance
             }
             return indexValue;
         }
+
+        /// <remarks>Interpolation between two values</remarks>
+        /// <returns>double</returns>
         public static double interpolationColumn(Dictionary<string, int> firstDictWithKeyIsText, Dictionary<string, int> secondDictWithKeyIsNumber, string valueFirstDict, string valueSecondDict, double[,] sheet)
         {
             
@@ -71,6 +80,8 @@ namespace fireResistance
             return result;
         }
 
+        /// <remarks>Determining the temperature at a specific point by interpolating the values of the tables</remarks>
+        /// <returns>string - temperature in degrees Celsius</returns>
         public static string interpolationTemperatureSheet(double[,] sheet, Dictionary<string, int> DictWithKeyIsText, string valueRow, string valueColumn)
         {
 

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace fireResistance
 {
+    /// <summary>
+    /// The class contains a dictionary with the diameter of the armature and the corresponding area of the armature 
+    /// </summary>
     public class DataArmatureInfo
     {
         public static Dictionary<int, double> sheetArmatureDiameter = new Dictionary<int, double>()

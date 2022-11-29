@@ -8,6 +8,9 @@ using System.Xml.Linq;
 
 namespace fireResistance
 {
+    /// <summary>
+    /// Class contains all varibals for calculation fire resistance
+    /// </summary>
     public class DataFireResistanceColumn
     {
         public string fireResistanceVolume;
@@ -76,10 +79,6 @@ namespace fireResistance
         public bool checkSecond = true;
         public bool checkthird = true;
 
-
-
-
-
         public DataFireResistanceColumn(string fireResistanceVolume, double lenthElement, int heightElement, int widthElement,
                         double lenthFromArmatureToEdge, string fixationElement, string armatureClass, string concreteType,
                         string concreteClass, int armatureDiameter, int armatureAmount, double moment, double strength)
@@ -97,169 +96,11 @@ namespace fireResistance
             this.armatureAmount = armatureAmount;
             this.moment = moment / 0.00000010197162123;
             this.strength = strength / 0.00010197162123;
-
         }
 
-        public string ChooseTemperatureArmature(string fireResistanceVolume, double lenthFromArmatureToEdge, double widthElement, double heightElement = 0)
-        {
-            double width;
-
-            if (heightElement != 0) width = Math.Min(heightElement, widthElement);
-            else width = widthElement;
-            string temperature = string.Empty;
-            string temperatureFirst = string.Empty;
-            string temperatureSecond = string.Empty;
-
-            if (width == 200)
-            {
-                foreach(var name in Temperature.chooseArrayTemperature)
-                {
-                    if (name.Key.EndsWith($"200_{fireResistanceVolume}"))
-                    {
-                        temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet200, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
-                    }
-                }
-            }
-            else if (width == 300)
-            {
-                foreach (var name in Temperature.chooseArrayTemperature)
-                {
-                    if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
-                    {
-                        temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet300, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
-                    }
-                }
-            }
-            else if (width >= 400)
-            {
-                foreach (var name in Temperature.chooseArrayTemperature)
-                {
-                    if (name.Key.EndsWith($"400_{fireResistanceVolume}"))
-                    {
-                        temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet400, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
-                    }
-                }
-            }
-            else if (width > 200 && width < 300)
-            {
-                foreach(var name in Temperature.chooseArrayTemperature)
-                {
-                    if (name.Key.EndsWith($"200_{fireResistanceVolume}"))
-                    {
-                        temperatureFirst = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet200, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
-                    }
-                }
-
-                foreach (var name in Temperature.chooseArrayTemperature)
-                {
-                    if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
-                    {
-                        temperatureSecond = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet300, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
-                    }
-                }
-                temperature = Convert.ToString(Math.Round(Convert.ToInt32(temperatureFirst) - (width - 200) / 100 * (Convert.ToInt32(temperatureFirst) - Convert.ToInt32(temperatureSecond)), 0));
-                if (Convert.ToInt32(temperature) > Convert.ToInt32(temperatureFirst)) temperature = temperatureFirst;
-            }
-            else if (width > 300 && width < 400)
-            {
-                foreach (var name in Temperature.chooseArrayTemperature)
-                {
-                    if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
-                    {
-                        temperatureFirst = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet300, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
-                    }
-                }
-
-                foreach (var name in Temperature.chooseArrayTemperature)
-                {
-                    if (name.Key.EndsWith($"400_{fireResistanceVolume}"))
-                    {
-                        temperatureSecond = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet400, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
-                    }
-                }
-                temperature = Convert.ToString(Math.Round(Convert.ToInt32(temperatureFirst) - (width - 300) / 100 * (Convert.ToInt32(temperatureFirst) - Convert.ToInt32(temperatureSecond)), 0));
-                if (Convert.ToInt32(temperature) > Convert.ToInt32(temperatureFirst)) temperature = temperatureFirst;
-            }
-            return temperature;
-        }
-
-        public string ChooseTemperatureConcrete(string fireResistanceVolume, int widthElement, int heightElement, int distanceFromBringToPointAverageTemperature, int criticalTemperature)
-        {
-            string temperature = string.Empty;
-            if (widthElement == 200 && heightElement >= widthElement)
-            {
-                int lenthForCalculation = distanceFromBringToPointAverageTemperature;
-                int widthForCalculation = widthElement/2;
-                if (lenthForCalculation > widthForCalculation) lenthForCalculation = widthForCalculation;
-                foreach (var name in Temperature.chooseArrayTemperature)
-                {
-                    if (name.Key.EndsWith($"200_{fireResistanceVolume}"))
-                    {
-                        temperature = AverageTemperature.AverageTemperatureConcrete(name.Value, Temperature.lenthFromArmatureToEdgeSheet200, lenthForCalculation, criticalTemperature, widthForCalculation);
-                    }
-                }
-
-            }
-            else if (widthElement == 300 && heightElement >= widthElement)
-            {
-                int lenthForCalculation = distanceFromBringToPointAverageTemperature;
-                int widthForCalculation = widthElement / 2;
-                if (lenthForCalculation > widthForCalculation) lenthForCalculation = widthForCalculation;
-                foreach (var name in Temperature.chooseArrayTemperature)
-                {
-                    if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
-                    {
-                        temperature = AverageTemperature.AverageTemperatureConcrete(name.Value, Temperature.lenthFromArmatureToEdgeSheet300, lenthForCalculation, criticalTemperature, widthForCalculation);
-                    }
-                }
-            }
-            else if (widthElement == 400 && heightElement >= widthElement)
-            {
-                int lenthForCalculation = distanceFromBringToPointAverageTemperature;
-                int widthForCalculation = widthElement / 2;
-                if (lenthForCalculation > widthForCalculation) lenthForCalculation = widthForCalculation;
-                foreach (var name in Temperature.chooseArrayTemperature)
-                {
-                    if (name.Key.EndsWith($"400_{fireResistanceVolume}"))
-                    {
-                        temperature = AverageTemperature.AverageTemperatureConcrete(name.Value, Temperature.lenthFromArmatureToEdgeSheet400, lenthForCalculation, criticalTemperature, widthForCalculation);
-                    }
-                }
-            }
-            else if (widthElement > 400 && heightElement >= widthElement)
-            {
-                int lenthForCalculation = distanceFromBringToPointAverageTemperature;
-                int widthForCalculation = 400 / 2;
-                if (lenthForCalculation > widthForCalculation) lenthForCalculation = widthForCalculation;
-                int additionalWidth = (widthElement - 400) / 2;
-                foreach (var name in Temperature.chooseArrayTemperature)
-                {
-                    if (name.Key.EndsWith($"400_{fireResistanceVolume}"))
-                    {
-                        temperature = AverageTemperature.AverageTemperatureConcrete(name.Value, Temperature.lenthFromArmatureToEdgeSheet400, lenthForCalculation, criticalTemperature, widthForCalculation, additionalWidth);
-                    }
-                }
-            }
-            else if (widthElement > 200 && widthElement < 300 && heightElement >= widthElement)
-            {
-                string temperatureFirst = ChooseTemperatureConcrete(fireResistanceVolume, 200, heightElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
-                string temperatureSecond = ChooseTemperatureConcrete(fireResistanceVolume, 300, heightElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
-                temperature = Convert.ToString(Math.Round(Convert.ToDouble(temperatureFirst) - (Convert.ToDouble(widthElement) - 200) / 100 * (Convert.ToDouble(temperatureFirst) - Convert.ToDouble(temperatureSecond)), 0));
-            }
-            else if (widthElement > 300 && widthElement < 400 && heightElement >= widthElement)
-            {
-                string temperatureFirst = ChooseTemperatureConcrete(fireResistanceVolume, 300, heightElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
-                string temperatureSecond = ChooseTemperatureConcrete(fireResistanceVolume, 400, heightElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
-
-                temperature = Convert.ToString(Math.Round(Convert.ToDouble(temperatureFirst) - (Convert.ToDouble(widthElement) - 300) / 100 * (Convert.ToDouble(temperatureFirst) - Convert.ToDouble(temperatureSecond)), 0));
-            }
-            else if (widthElement > heightElement)
-            {
-                temperature = ChooseTemperatureConcrete(fireResistanceVolume, heightElement, widthElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
-            }
-            return temperature;
-        }
-
+        /// <summary>
+        /// Assigns values to all unknown variables
+        /// </summary>
         public void Сalculation()
         {
             armatureSquare = DataArmatureInfo.sheetArmatureDiameter[armatureDiameter] * armatureAmount;
@@ -362,10 +203,184 @@ namespace fireResistance
                 result = demandLeftPart / demandRightPart;
                 if (demandLeftPart > demandRightPart) checkthird = false;
 
-
-
             }
 
+        }
+
+        /// <summary>
+        /// Determines the temperature of armature
+        /// </summary>
+        /// <remarks>if the width is 200 - 400 mm, the temperature is determined by
+        /// the graphs of appendix B SP468 with interpolation. If the width is biger than 400 mm,
+        /// the temperature value is taken as for the width of 400 mm</remarks>
+        /// <returns>string - temperature of armature in degrees Celsius</returns>
+        public static string ChooseTemperatureArmature(string fireResistanceVolume, double lenthFromArmatureToEdge, double widthElement, double heightElement = 0)
+        {
+            double width;
+
+            if (heightElement != 0) width = Math.Min(heightElement, widthElement);
+            else width = widthElement;
+            string temperature = string.Empty;
+            string temperatureFirst = string.Empty;
+            string temperatureSecond = string.Empty;
+
+            if (width == 200)
+            {
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"200_{fireResistanceVolume}"))
+                    {
+                        temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet200, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
+                    }
+                }
+            }
+            else if (width == 300)
+            {
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
+                    {
+                        temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet300, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
+                    }
+                }
+            }
+            else if (width >= 400)
+            {
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"400_{fireResistanceVolume}"))
+                    {
+                        temperature = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet400, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
+                    }
+                }
+            }
+            else if (width > 200 && width < 300)
+            {
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"200_{fireResistanceVolume}"))
+                    {
+                        temperatureFirst = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet200, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
+                    }
+                }
+
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
+                    {
+                        temperatureSecond = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet300, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
+                    }
+                }
+                temperature = Convert.ToString(Math.Round(Convert.ToInt32(temperatureFirst) - (width - 200) / 100 * (Convert.ToInt32(temperatureFirst) - Convert.ToInt32(temperatureSecond)), 0));
+                if (Convert.ToInt32(temperature) > Convert.ToInt32(temperatureFirst)) temperature = temperatureFirst;
+            }
+            else if (width > 300 && width < 400)
+            {
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
+                    {
+                        temperatureFirst = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet300, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
+                    }
+                }
+
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"400_{fireResistanceVolume}"))
+                    {
+                        temperatureSecond = Interpolation.interpolationTemperatureSheet(name.Value, Temperature.lenthFromArmatureToEdgeSheet400, Convert.ToString(lenthFromArmatureToEdge), Convert.ToString(lenthFromArmatureToEdge));
+                    }
+                }
+                temperature = Convert.ToString(Math.Round(Convert.ToInt32(temperatureFirst) - (width - 300) / 100 * (Convert.ToInt32(temperatureFirst) - Convert.ToInt32(temperatureSecond)), 0));
+                if (Convert.ToInt32(temperature) > Convert.ToInt32(temperatureFirst)) temperature = temperatureFirst;
+            }
+            return temperature;
+        }
+
+
+
+        /// <summary>
+        /// Determines the temperature of concrete
+        /// </summary>
+        /// <remarks>if the width(width biger height) is 200 - 400 mm, the temperature is determined by
+        /// the graphs of appendix B SP468 with interpolation. If the width(width biger height) is biger than 400 mm,
+        /// the temperature value is taken as for the width of 400 mm. If width biger height, then width and height change places</remarks>
+        /// <returns>string - temperature of concrete in degrees Celsius</returns>
+        public static string ChooseTemperatureConcrete(string fireResistanceVolume, int widthElement, int heightElement, int distanceFromBringToPointAverageTemperature, int criticalTemperature)
+        {
+            string temperature = string.Empty;
+            if (widthElement == 200 && heightElement >= widthElement)
+            {
+                int lenthForCalculation = distanceFromBringToPointAverageTemperature;
+                int widthForCalculation = widthElement / 2;
+                if (lenthForCalculation > widthForCalculation) lenthForCalculation = widthForCalculation;
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"200_{fireResistanceVolume}"))
+                    {
+                        temperature = AverageTemperature.AverageTemperatureConcrete(name.Value, Temperature.lenthFromArmatureToEdgeSheet200, lenthForCalculation, criticalTemperature, widthForCalculation);
+                    }
+                }
+
+            }
+            else if (widthElement == 300 && heightElement >= widthElement)
+            {
+                int lenthForCalculation = distanceFromBringToPointAverageTemperature;
+                int widthForCalculation = widthElement / 2;
+                if (lenthForCalculation > widthForCalculation) lenthForCalculation = widthForCalculation;
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"300_{fireResistanceVolume}"))
+                    {
+                        temperature = AverageTemperature.AverageTemperatureConcrete(name.Value, Temperature.lenthFromArmatureToEdgeSheet300, lenthForCalculation, criticalTemperature, widthForCalculation);
+                    }
+                }
+            }
+            else if (widthElement == 400 && heightElement >= widthElement)
+            {
+                int lenthForCalculation = distanceFromBringToPointAverageTemperature;
+                int widthForCalculation = widthElement / 2;
+                if (lenthForCalculation > widthForCalculation) lenthForCalculation = widthForCalculation;
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"400_{fireResistanceVolume}"))
+                    {
+                        temperature = AverageTemperature.AverageTemperatureConcrete(name.Value, Temperature.lenthFromArmatureToEdgeSheet400, lenthForCalculation, criticalTemperature, widthForCalculation);
+                    }
+                }
+            }
+            else if (widthElement > 400 && heightElement >= widthElement)
+            {
+                int lenthForCalculation = distanceFromBringToPointAverageTemperature;
+                int widthForCalculation = 400 / 2;
+                if (lenthForCalculation > widthForCalculation) lenthForCalculation = widthForCalculation;
+                int additionalWidth = (widthElement - 400) / 2;
+                foreach (var name in Temperature.chooseArrayTemperature)
+                {
+                    if (name.Key.EndsWith($"400_{fireResistanceVolume}"))
+                    {
+                        temperature = AverageTemperature.AverageTemperatureConcrete(name.Value, Temperature.lenthFromArmatureToEdgeSheet400, lenthForCalculation, criticalTemperature, widthForCalculation, additionalWidth);
+                    }
+                }
+            }
+            else if (widthElement > 200 && widthElement < 300 && heightElement >= widthElement)
+            {
+                string temperatureFirst = ChooseTemperatureConcrete(fireResistanceVolume, 200, heightElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
+                string temperatureSecond = ChooseTemperatureConcrete(fireResistanceVolume, 300, heightElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
+                temperature = Convert.ToString(Math.Round(Convert.ToDouble(temperatureFirst) - (Convert.ToDouble(widthElement) - 200) / 100 * (Convert.ToDouble(temperatureFirst) - Convert.ToDouble(temperatureSecond)), 0));
+            }
+            else if (widthElement > 300 && widthElement < 400 && heightElement >= widthElement)
+            {
+                string temperatureFirst = ChooseTemperatureConcrete(fireResistanceVolume, 300, heightElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
+                string temperatureSecond = ChooseTemperatureConcrete(fireResistanceVolume, 400, heightElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
+
+                temperature = Convert.ToString(Math.Round(Convert.ToDouble(temperatureFirst) - (Convert.ToDouble(widthElement) - 300) / 100 * (Convert.ToDouble(temperatureFirst) - Convert.ToDouble(temperatureSecond)), 0));
+            }
+            else if (widthElement > heightElement)
+            {
+                temperature = ChooseTemperatureConcrete(fireResistanceVolume, heightElement, widthElement, distanceFromBringToPointAverageTemperature, criticalTemperature);
+            }
+            return temperature;
         }
     }
 }

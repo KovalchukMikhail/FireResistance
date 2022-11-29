@@ -8,8 +8,15 @@ using Word = Microsoft.Office.Interop.Word;
 
 namespace fireResistance
 {
+    /// <summary>
+    /// The class contains a method that creates a report 
+    /// </summary>
     public class CreateDoc
     {
+
+        /// <summary>
+        /// Launches MS Word and creates a reportt 
+        /// </summary>
         public void Create(DataFireResistanceColumn data)
         {
             Word.Application wordApp = new Word.Application();

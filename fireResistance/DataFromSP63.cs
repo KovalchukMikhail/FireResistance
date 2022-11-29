@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace fireResistance
 {
+    /// <summary>
+    /// The class contains data from SP63 
+    /// </summary>
     public class DataFromSP63
     {
-        // Нормативное сопротивление бетона сжатию. Данные из таблицы 6.7 СП63
+
+        // Нормативное сопротивление бетона сжатию. Данные из таблицы 6.7 СП63 
         public static Dictionary<string, double> sheetConcreteResistNormative = new Dictionary<string, double>()
         {
             {"B15", 11},

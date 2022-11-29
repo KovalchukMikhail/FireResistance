@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace fireResistance
 {
+    /// <summary>
+    /// The class contains data from SP468 
+    /// </summary>
     public class DataFromeSP468
     {
         public static Dictionary<string, int> concreteTypeForSheet = new Dictionary<string, int>()
