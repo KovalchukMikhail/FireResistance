@@ -115,8 +115,8 @@ namespace fireResistance
                 if (textBoxLenthFromArmatureToEdge.Text == "") tooltip += "Укажите расстояние от края элемента до центра тяжести арматуры (a)\n";
                 if (textBoxMoment.Text == "") tooltip += "Укажите изгибающий момент действующий на элемент (М)\n";
                 if (textBoxStrength.Text == "") tooltip += "Укажите продольную силу действующую на элемент (N)\n";
-                if (textBoxStrength.Text.StartsWith(",")) tooltip += "Значение момента (М) не может начинаться с ','\n";
-                if (textBoxMoment.Text.StartsWith(",")) tooltip += "Значение продольной силы (N) не может начинаться с ','\n";
+                if (textBoxStrength.Text.StartsWith(",")) tooltip += "Значение продольной силы (N) не может начинаться с ','\n";
+                if (textBoxMoment.Text.StartsWith(",")) tooltip += "Значение момента (М) не может начинаться с ','\n";
 
                 MessageBox.Show(tooltip);
             }
