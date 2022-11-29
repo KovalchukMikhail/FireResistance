@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace fireResistance
 {
+    /// <summary>
+    /// The class contains data from appendix Б SP468 
+    /// </summary>
     public class Temperature
     {
         public static Dictionary<string, int> lenthFromArmatureToEdgeSheet200 = new Dictionary<string, int>()
